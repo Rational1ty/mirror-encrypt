@@ -6,7 +6,7 @@ NOTE TO USER: This document contains detailed information about many aspects of 
 is meant to be used as a quick reference to get a good idea of how to use the program or how to fix any problems that may occur. Feel
 free to read ONLY the short overview or list of commands before using the program; it's completely fine to just jump right in.
 
-    - Overview:
+    **Overview:**
         - This program provides an interesting way to encrypt/decrypt messages using mirrors and LASER BEAMS!
         - It includes various ways to create your own unique sets of mirrors (mirror fields), load mirrors that you've already made,
           generate mirrors automatically, or save some of your favorite combinations
@@ -16,15 +16,15 @@ free to read ONLY the short overview or list of commands before using the progra
         - Additionally, you can customize many parts of the program using start-up commands. A full list of commands, what they do,
           and how to use them can be found below
 
-    - Info:
+    **Info:**
         - Author: Matthew Davidson (mdavidson390@outlook.com)
         - Version: 2.7.0.4
         - Languages: Java (JDK 13)
         - Libraries: Swing, AWT
         - Offline
-	- LOC: 1460
+	    - LOC: 1460
 
---------------------------------------------------------------------------------------------------------------------------------------
+---
 
 You can use commands when launching or running the program to change certain behaviors!
 
