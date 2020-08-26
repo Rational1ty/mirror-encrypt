@@ -198,3 +198,8 @@ How to install Java on your computer
             - Ex: You just compiled "ProgramOne.java" but then entered the command "java ProgramTwo"
             - Try re-entering the command, making sure that the spelling of the program's name is correct. If the error persists,
               then make sure that you are trying to run the same program that you just compiled.
+
+Word
+: Definition
+: Another
+: Final
