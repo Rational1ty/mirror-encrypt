@@ -11,9 +11,8 @@ free to read ONLY the short overview or list of commands before using the progra
 - It includes various ways to create your own unique sets of mirrors (mirror fields), load mirrors that you've already made,
   generate mirrors automatically, or save some of your favorite combinations
 - The program also animates the process in real time, unless it is run in text-only mode (see commands for more info)
-
 - To run the program, double-click on the file "launcher.bat"
-- Additionally, you can customize many parts of the program using start-up commands. A full list of commands, what they do,
+- Additionally, you can customize many parts of the program using commands. A full list of commands, what they do,
   and how to use them can be found below
 
 **Info:**
@@ -26,63 +25,61 @@ free to read ONLY the short overview or list of commands before using the progra
 
 ---
 
-You can use commands when launching or running the program to change certain behaviors!
+## Commands
 
-    - All commands are case-insensitive
-    - Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part)
-    - Ex: "key:value", "delay:100"
+All commands are case-insensitive
+Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part)
+Ex: "key:value", "delay:100"
 
-    - Commands are added to the program's "launcher.bat" file, in the "commands" variable, seperated by a space
-        - To edit the program's start-up commands, right click on the "launcher.bat" file and click "edit"
-        - Go to the variable named "commands" and add the commands that you'd like to run
-        - Ex: "commands=window:true delay:50 beam:blue"
-        - Save your changes by pressing "ctrl + s", then close the file. It is now ready to run
-  
-    - If you enter a command that is invalid (the key, value, or both key and value are wrong) the program will display an error
-      and then safely shut down
+Commands are added to the program's "launcher.bat" file, in the "commands" variable, seperated by a space
+1. To edit the program's start-up commands, right click on the "launcher.bat" file and click "edit"
+2. Go to the variable named "commands" and add the commands that you'd like to run
+3. Ex: `set commands="window:true delay:50 beam:blue"`
+4. Save your changes by pressing "ctrl + s", then close the file. It is now ready to run
 
-    - In the list of commands below, the value of each command is replaced with a placeholder that represents a value (tf for
-      true/false, ms for # of milliseconds, and so on)
+A few things to keep in mind when using commands:
+- If you enter a command that is invalid (the key, value, or both key and value are wrong) the program will display an error
+  and then safely shut down
+- In the list of commands below, the value of each command is replaced with a placeholder that represents a value (tf for
+  true/false, ms for # of milliseconds, and so on)
+- List of commands: beam:color, color1:color, color2:color, window:tf, delay:ms, repeat:tf
+- Detailed list of commands:
 
-    - List of commands: beam:color, color1:color, color2:color, window:tf, delay:ms, repeat:tf
+- `beam:color`: changes the color of the beam
+: Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
+: Ex: "beam:cyan", "beam:green"
+: Default value: red
+: This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
+  main colors (color1/color2) are either red or green
+: It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
+  harder to see
 
-    - Detailed list of commands:
+- "color1:color": changes the color of color1 (the "input" color)
+    - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
+    - Ex: "color1:gray", "color1:magenta"
+    - Default value: red
 
-      - "beam:color": changes the color of the beam
-          - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
-          - Ex: "beam:cyan", "beam:green"
-          - Default value: red
-          - This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
-            main colors (color1/color2) are either red or green
-          - It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
-            harder to see
+- "color2:color": changes the color of color2 (the "output" color)
+    - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
+    - Ex: "color2:orange", "color1:yellow"
+    - Default value: green
 
-      - "color1:color": changes the color of color1 (the "input" color)
-          - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
-          - Ex: "color1:gray", "color1:magenta"
-          - Default value: red
+- "delay:ms": changes the amount of time (in milliseconds) between each frame of animation (assuming window is true)
+    - Accepted values: any non-negative integer (ms >= 0)
+    - Ex: "delay:25" would make the animation faster, while "delay:100" would make it slower
+    - Default value: 50
+    - It is not recommended to use values greater than 500 or values that are not an even factor of 1000
+    - Ex: "delay:2000" (just extrememly slow), or "delay:37" (may cause animation timing issues)
 
-      - "color2:color": changes the color of color2 (the "output" color)
-          - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
-          - Ex: "color2:orange", "color1:yellow"
-          - Default value: green
+- "repeat:tf": toggles the program's repeat functionality when creating a mirror field from keyboard (see tips & tricks section)
+    - Accepted values: boolean (true, false)
+    - Ex: "repeat:true" or "repeat:false"
+    - Default value: true
 
-      - "delay:ms": changes the amount of time (in milliseconds) between each frame of animation (assuming window is true)
-          - Accepted values: any non-negative integer (ms >= 0)
-          - Ex: "delay:25" would make the animation faster, while "delay:100" would make it slower
-          - Default value: 50
-          - It is not recommended to use values greater than 500 or values that are not an even factor of 1000
-          - Ex: "delay:2000" (just extrememly slow), or "delay:37" (may cause animation timing issues)
-
-      - "repeat:tf": toggles the program's repeat functionality when creating a mirror field from keyboard (see tips & tricks section)
-          - Accepted values: boolean (true, false)
-          - Ex: "repeat:true" or "repeat:false"
-          - Default value: true
-
-      - "window:tf": determines whether or not the program creates a window to animate the encryption/decryption process
-          - Accepted values: boolean (true, false)
-          - Ex: "window:true" would cause a window to be created; "window:false" would cause the program to run in text-only mode
-          - Default value: true
+- "window:tf": determines whether or not the program creates a window to animate the encryption/decryption process
+    - Accepted values: boolean (true, false)
+    - Ex: "window:true" would cause a window to be created; "window:false" would cause the program to run in text-only mode
+    - Default value: true
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
