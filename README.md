@@ -200,10 +200,5 @@ How to install Java on your computer
               then make sure that you are trying to run the same program that you just compiled.
 
 Word
-> Definition  
+> Definition 
 > Another
-
-Here is a todo list
-- [x] Item 1
-- [ ] Item 2
-- [ ] Item 3
