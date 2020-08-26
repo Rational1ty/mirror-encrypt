@@ -1,4 +1,6 @@
-README - MirrorEncrypt.java
+# mirror-encrypt
+
+Encrypt or decode messages using a grid of mirrors and a laser
 
 NOTE TO USER: This document contains detailed information about many aspects of the program and is NOT necessary to read in full. It
 is meant to be used as a quick reference to get a good idea of how to use the program or how to fix any problems that may occur. Feel
