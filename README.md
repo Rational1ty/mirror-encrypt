@@ -27,9 +27,9 @@ free to read ONLY the short overview or list of commands before using the progra
 
 ## Commands
 
-All commands are case-insensitive
-Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part)
-Ex: "key:value", "delay:100"
+All commands are case-insensitive\
+Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part)\
+Ex: `key:value`, `delay:100`\
 
 Commands are added to the program's "launcher.bat" file, in the "commands" variable, seperated by a space
 1. To edit the program's start-up commands, right click on the "launcher.bat" file and click "edit"
