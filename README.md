@@ -87,6 +87,7 @@ A few things to keep in mind when using commands:
 ## Tips and Tricks
 
 **Creating/loading mirror field**\
+
 *From the keyboard:*
 - When creating a new mirror field from the keyboard, you can enter numbers (1-9) to represent a group of spaces or the
   letter "n" to represent a line break (same as hitting the "enter" key, or entering the amount of spaces to the next line)
@@ -129,20 +130,19 @@ A few things to keep in mind when using commands:
 
 ~~How to install Java on your computer
 
-- In order to run a Java program, you must first install Java on your computer. If Java is already installed on this device,
-then you should be ready to go. Otherwise, follow the steps in section 2: "Installing Java". If you're not sure whether you
+In order to run a Java program, you must first install Java on your computer. If Java is already installed on this device, 
+then you should be ready to go. Otherwise, follow the steps in section 2: "Installing Java". If you're not sure whether you 
 have Java installed or not, follow the brief steps in section 1: "Checking if Java is already installed"
 
-
 - Checking if Java is already installed:
-1. Open Run by pressing "Windows key + r" or by searching for "run" in the Windows search bar
-2. In Run, type "cmd" and press "enter" or click "ok" to open the Windows command line (cmd.exe)
-3. In the command line, type "javac -version"
-4. If Java is installed, you should get a result similar to this:
+    1. Open Run by pressing "Windows key + r" or by searching for "run" in the Windows search bar
+    2. In Run, type "cmd" and press "enter" or click "ok" to open the Windows command line (cmd.exe)
+    3. In the command line, type "javac -version"
+    4. If Java is installed, you should get a result similar to this:
 
-    > javac 13
+        > javac 13
 
-   If not, you will need to install Java before you can run any Java programs
+       If not, you will need to install Java before you can run any Java programs
 
 
 - Installing Java:
@@ -152,7 +152,7 @@ have Java installed or not, follow the brief steps in section 1: "Checking if Ja
     4. Double-click on the extracted folder
 
 
-- Common issues and errors when running a Java program using command line:
+Common issues and errors when running a Java program using command line:
 - "The system cannot find the drive specified"
     - This usually means that either the drive that you entered does not exist on your device, or the drive that you entered
         is not online.
