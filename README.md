@@ -201,5 +201,8 @@ How to install Java on your computer
 
 Word
 : Definition
-: Another
-: Final
+
+Here is a todo list
+- [x] Item 1
+- [ ] Item 2
+- [ ] Item 3
