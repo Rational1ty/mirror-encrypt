@@ -46,95 +46,88 @@ A few things to keep in mind when using commands:
 - Detailed list of commands:
 
 - `beam:color`: changes the color of the beam
-: Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
-: Ex: "beam:cyan", "beam:green"
-: Default value: red
-: This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
-  main colors (color1/color2) are either red or green
-: It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
+> Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
+> Ex: "beam:cyan", "beam:green"  
+> Default value: red  
+> This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
+  main colors (color1/color2) are either red or green  
+> It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
   harder to see
 
-- "color1:color": changes the color of color1 (the "input" color)
-    - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
-    - Ex: "color1:gray", "color1:magenta"
-    - Default value: red
+- `color1:color`: changes the color of color1 (the "input" color)
+> Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
+> Ex: `color1:gray`, `color1:magenta`  
+> Default value: red  
 
-- "color2:color": changes the color of color2 (the "output" color)
-    - Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
-    - Ex: "color2:orange", "color1:yellow"
-    - Default value: green
+- `color2:color`: changes the color of color2 (the "output" color)
+> Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
+> Ex: `color2:orange`, `color1:yellow`  
+> Default value: green  
 
-- "delay:ms": changes the amount of time (in milliseconds) between each frame of animation (assuming window is true)
-    - Accepted values: any non-negative integer (ms >= 0)
-    - Ex: "delay:25" would make the animation faster, while "delay:100" would make it slower
-    - Default value: 50
-    - It is not recommended to use values greater than 500 or values that are not an even factor of 1000
-    - Ex: "delay:2000" (just extrememly slow), or "delay:37" (may cause animation timing issues)
+- `delay:ms`: changes the amount of time (in milliseconds) between each frame of animation (assuming window is true)
+> Accepted values: any non>negative integer (ms >= 0)  
+> Ex: `delay:25` would make the animation faster, while `delay:100` would make it slower  
+> Default value: 50  
+> It is not recommended to use values greater than 500 or values that are not an even factor of 1000  
+> Ex: `delay:2000` (just extrememly slow), or `delay:37` (may cause animation timing issues)  
 
-- "repeat:tf": toggles the program's repeat functionality when creating a mirror field from keyboard (see tips & tricks section)
-    - Accepted values: boolean (true, false)
-    - Ex: "repeat:true" or "repeat:false"
-    - Default value: true
+- `repeat:tf`: toggles the program's repeat functionality when creating a mirror field from keyboard (see tips & tricks section)
+> Accepted values: boolean (true, false)  
+> Ex: `repeat:true` or `repeat:false`  
+> Default value: true  
 
-- "window:tf": determines whether or not the program creates a window to animate the encryption/decryption process
-    - Accepted values: boolean (true, false)
-    - Ex: "window:true" would cause a window to be created; "window:false" would cause the program to run in text-only mode
-    - Default value: true
+- `window:tf`: determines whether or not the program creates a window to animate the encryption/decryption process
+> Accepted values: boolean (true, false)  
+> Ex: `window:true` would cause a window to be created; `window:false` would cause the program to run in text>only mode  
+> Default value: true  
 
---------------------------------------------------------------------------------------------------------------------------------------
+---
 
-Helpful tips and tricks to remember when using this program
+## Tips and Tricks
 
-    - Creating/loading mirror field:
+**Creating/loading mirror field**
+*From the keyboard:*
+- When creating a new mirror field from the keyboard, you can enter numbers (1-9) to represent a group of spaces or the
+  letter "n" to represent a line break (same as hitting the "enter" key, or entering the amount of spaces to the next line)
+- Ex: `/\/7/\` would be interpreted as `/\/       /\`
+- Any non-single digit number will be interpreted as two seperate numbers
+- Ex: `/\/43/\` -> `/\/       /\`
+- Ex: `/\/n\/\` -> `/\/<br/>\/\`
+- If you enter mirrors from the keyboard, the program will automatically repeat the sequence that you entered until the
+    entire board is filled up, as long as "repeat" is true. You can use this to make some really interesting patterns
+    (hint: try entering a sequence that is exactly 13 characters long)
 
-        - From the keyboard:
-            - When creating a new mirror field from the keyboard, you can enter numbers (1-9) to represent a group of spaces or the
-              letter "n" to represent a line break (same as hitting the "enter" key, or entering the amount of spaces to the next line)
-                - Ex: "/\/7/\" would be interpreted as "/\/       /\"
-                    - Any non-single digit number will be interpreted as two seperate numbers
-                    - Ex: "/\/43/\" would be interpreted as "/\/       /\"
-                - Ex: "/\/n/\" would be interpreted as "/\/
-                                                        /\ "
+*From a file:*
+- You can create your own mirror fields by using notepad or any other simple text editor - get creative!
+- If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a";
+  it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
+- Save it as a ".txt" file in the program's "assets" folder for easy access
+- When running the program, you can load saved mirror fields by entering "../assets/fileName.txt" when prompted
+- When exporting a set of mirrors using the "Export mirror field" option, save it as "../assets/fileName.txt" when asked
 
-            - If you enter mirrors from the keyboard, the program will automatically repeat the sequence that you entered until the
-              entire board is filled up, as long as "repeat" is true. You can use this to make some really interesting patterns
-              (hint: try entering a sequence that is exactly 13 characters long)
-        
-        - From a file:
-            - You can create your own mirror fields by using notepad or any other simple text editor - get creative!
-                - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a";
-                  it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
-                - Save it as a ".txt" file in the program's "assets" folder for easy access
+*From random generation:*
+- When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
+  different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
+  better. Try to find the perfect amount of mirrors to create the most unpredictable encryption!
 
-            - When running the program, you can load saved mirror fields by entering "../assets/fileName.txt" when prompted
+**Main menu**
+- Although there are seperate options for encrypting and decrypting, the process is acutally the same for both. This means
+  that you can easily trace a path through the mirrors by yourself to create an encrypted message, then check the result
+  using the program. Try creating some messages on your own!
+- Sometimes, the animated window will be created in the background whenever you start to encrypt/decrypt a message. If you
+  don't see the window show up, try looking at the taskbar (bottom of the screen) for a picture of a red laser bouncing off
+  a mirror. This is the window; simply click it to bring it to the front
 
-            - When exporting a set of mirrors using the "Export mirror field" option, save it as "../assets/fileName.txt" when asked
+- If you really like the mirrors that you have set up, you can save them to a .txt file by choosing option 4: "Export mirror
+  field"
+    - Enter a file path (Ex: "../assets/mirrors-1.txt") when prompted to save the mirrors
+    - It is recommended to save all of your mirror field files to the "assets" folder, so that they are all in the same place
+    - Don't worry about creating the file first; the file will be created for you if it doesn't already exist
+    - Also, you can enter the name of a file that already exists to replace it
 
-        - From random generation:
-            - When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
-              different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
-              better. Try to find the perfect amount of mirrors to create the most unpredictable encryption!
+---
 
-
-    - Main menu:
-        - Although there are seperate options for encrypting and decrypting, the process is acutally the same for both! This means
-          that you can easily trace a path through the mirrors by yourself to create an encrypted message, then check the result
-          using the program. Try creating some messages on your own!
-
-        - Sometimes, the animated window will be created in the background whenever you start to encrypt/decrypt a message. If you
-          don't see the window show up, try looking at the taskbar (bottom of the screen) for a picture of a red laser bouncing off
-          a mirror. This is the window; simply click it to bring it to the front
-
-        - If you really like the mirrors that you have set up, you can save them to a .txt file by choosing option 4: "Export mirror
-          field"!
-            - Enter a file path (Ex: "../assets/mirrors-1.txt") when prompted to save the mirrors
-            - It is recommended to save all of your mirror field files to the "assets" folder, so that they are all in the same place
-            - Don't worry about creating the file first; the file will be created for you if it doesn't already exist
-            - Also, you can enter the name of a file that already exists to replace it
-
---------------------------------------------------------------------------------------------------------------------------------------
-
-How to install Java on your computer
+~~How to install Java on your computer
 
     - In order to run a Java program, you must first install Java on your computer. If Java is already installed on this device,
       then you should be ready to go. Otherwise, follow the steps in section 2: "Installing Java". If you're not sure whether you
@@ -197,8 +190,4 @@ How to install Java on your computer
               run the wrong file
             - Ex: You just compiled "ProgramOne.java" but then entered the command "java ProgramTwo"
             - Try re-entering the command, making sure that the spelling of the program's name is correct. If the error persists,
-              then make sure that you are trying to run the same program that you just compiled.
-
-Word
-> Definition 
-> Another
+              then make sure that you are trying to run the same program that you just compiled.~~
