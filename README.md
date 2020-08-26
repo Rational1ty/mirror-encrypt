@@ -29,7 +29,7 @@ free to read ONLY the short overview or list of commands before using the progra
 
 All commands are case-insensitive\
 Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part)\
-Ex: `key:value`, `delay:100`\
+Ex: `key:value`, `delay:100`
 
 Commands are added to the program's "launcher.bat" file, in the "commands" variable, seperated by a space
 1. To edit the program's start-up commands, right click on the "launcher.bat" file and click "edit"
@@ -41,58 +41,58 @@ A few things to keep in mind when using commands:
 - If you enter a command that is invalid (the key, value, or both key and value are wrong) the program will display an error
   and then safely shut down
 - In the list of commands below, the value of each command is replaced with a placeholder that represents a value (tf for
-  true/false, ms for # of milliseconds, and so on)
-- List of commands: beam:color, color1:color, color2:color, window:tf, delay:ms, repeat:tf
-- Detailed list of commands:
+  true/false, ms for # of milliseconds, etc.)
 
+**List of commands:** beam:color, color1:color, color2:color, window:tf, delay:ms, repeat:tf
+
+**Command details:**
 - `beam:color`: changes the color of the beam
-> Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
-> Ex: "beam:cyan", "beam:green"  
-> Default value: red  
-> This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
-  main colors (color1/color2) are either red or green  
-> It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
-  harder to see
+    > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
+    > Ex: "beam:cyan", "beam:green"  
+    > Default value: red  
+    > This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
+    main colors (color1/color2) are either red or green  
+    > It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
+    harder to see
 
 - `color1:color`: changes the color of color1 (the "input" color)
-> Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
-> Ex: `color1:gray`, `color1:magenta`  
-> Default value: red  
+    > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
+    > Ex: `color1:gray`, `color1:magenta`  
+    > Default value: red  
 
 - `color2:color`: changes the color of color2 (the "output" color)
-> Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
-> Ex: `color2:orange`, `color1:yellow`  
-> Default value: green  
+    > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
+    > Ex: `color2:orange`, `color1:yellow`  
+    > Default value: green  
 
 - `delay:ms`: changes the amount of time (in milliseconds) between each frame of animation (assuming window is true)
-> Accepted values: any non>negative integer (ms >= 0)  
-> Ex: `delay:25` would make the animation faster, while `delay:100` would make it slower  
-> Default value: 50  
-> It is not recommended to use values greater than 500 or values that are not an even factor of 1000  
-> Ex: `delay:2000` (just extrememly slow), or `delay:37` (may cause animation timing issues)  
+    > Accepted values: any non>negative integer (ms >= 0)  
+    > Ex: `delay:25` would make the animation faster, while `delay:100` would make it slower  
+    > Default value: 50  
+    > It is not recommended to use values greater than 500 or values that are not an even factor of 1000  
+    > Ex: `delay:2000` (just extrememly slow), or `delay:37` (may cause animation timing issues)  
 
 - `repeat:tf`: toggles the program's repeat functionality when creating a mirror field from keyboard (see tips & tricks section)
-> Accepted values: boolean (true, false)  
-> Ex: `repeat:true` or `repeat:false`  
-> Default value: true  
+    > Accepted values: boolean (true, false)  
+    > Ex: `repeat:true` or `repeat:false`  
+    > Default value: true  
 
 - `window:tf`: determines whether or not the program creates a window to animate the encryption/decryption process
-> Accepted values: boolean (true, false)  
-> Ex: `window:true` would cause a window to be created; `window:false` would cause the program to run in text>only mode  
-> Default value: true  
+    > Accepted values: boolean (true, false)  
+    > Ex: `window:true` would cause a window to be created; `window:false` would cause the program to run in text-only mode  
+    > Default value: true  
 
 ---
 
 ## Tips and Tricks
 
-**Creating/loading mirror field**
+**Creating/loading mirror field**\
 *From the keyboard:*
 - When creating a new mirror field from the keyboard, you can enter numbers (1-9) to represent a group of spaces or the
   letter "n" to represent a line break (same as hitting the "enter" key, or entering the amount of spaces to the next line)
 - Ex: `/\/7/\` would be interpreted as `/\/       /\`
 - Any non-single digit number will be interpreted as two seperate numbers
 - Ex: `/\/43/\` -> `/\/       /\`
-- Ex: `/\/n\/\` -> `/\/<br/>\/\`
 - If you enter mirrors from the keyboard, the program will automatically repeat the sequence that you entered until the
     entire board is filled up, as long as "repeat" is true. You can use this to make some really interesting patterns
     (hint: try entering a sequence that is exactly 13 characters long)
@@ -140,16 +140,16 @@ have Java installed or not, follow the brief steps in section 1: "Checking if Ja
 3. In the command line, type "javac -version"
 4. If Java is installed, you should get a result similar to this:
 
-    javac 13
+    > javac 13
 
-    If not, you will need to install Java before you can run any Java programs
+   If not, you will need to install Java before you can run any Java programs
 
 
 - Installing Java:
-1. Go to the Oracle website at "[MISSING]"
-2. Click "[MISSING]" to download the current version of the JDK (Java Development Kit, it's Java + extra Java stuff)
-3. Go to your "downloads" folder, right click on the JDK folder, and click "extract all"
-4. Double-click on the extracted folder
+    1. Go to the Oracle website at "[MISSING]"
+    2. Click "[MISSING]" to download the current version of the JDK (Java Development Kit, it's Java + extra Java stuff)
+    3. Go to your "downloads" folder, right click on the JDK folder, and click "extract all"
+    4. Double-click on the extracted folder
 
 
 - Common issues and errors when running a Java program using command line:
