@@ -2,27 +2,27 @@
 
 Encrypt or decode messages using a grid of mirrors and a laser
 
-NOTE TO USER: This document contains detailed information about many aspects of the program and is NOT necessary to read in full. It
+~~NOTE TO USER: This document contains detailed information about many aspects of the program and is NOT necessary to read in full. It
 is meant to be used as a quick reference to get a good idea of how to use the program or how to fix any problems that may occur. Feel
-free to read ONLY the short overview or list of commands before using the program; it's completely fine to just jump right in.
+free to read ONLY the short overview or list of commands before using the program; it's completely fine to just jump right in.~~
 
-    **Overview:**
-        - This program provides an interesting way to encrypt/decrypt messages using mirrors and LASER BEAMS!
-        - It includes various ways to create your own unique sets of mirrors (mirror fields), load mirrors that you've already made,
-          generate mirrors automatically, or save some of your favorite combinations
-        - The program also animates the process in real time, unless it is run in text-only mode (see commands for more info)
+**Overview:**
+- This program provides an interesting way to encrypt/decrypt messages using mirrors and LASER BEAMS!
+- It includes various ways to create your own unique sets of mirrors (mirror fields), load mirrors that you've already made,
+  generate mirrors automatically, or save some of your favorite combinations
+- The program also animates the process in real time, unless it is run in text-only mode (see commands for more info)
 
-        - To run the program, double-click on the file "launcher.bat"
-        - Additionally, you can customize many parts of the program using start-up commands. A full list of commands, what they do,
-          and how to use them can be found below
+- To run the program, double-click on the file "launcher.bat"
+- Additionally, you can customize many parts of the program using start-up commands. A full list of commands, what they do,
+  and how to use them can be found below
 
-    **Info:**
-        - Author: Matthew Davidson (mdavidson390@outlook.com)
-        - Version: 2.7.0.4
-        - Languages: Java (JDK 13)
-        - Libraries: Swing, AWT
-        - Offline
-	    - LOC: 1460
+**Info:**
+- Author: Matthew Davidson (mdavidson390@outlook.com)
+- Version: 2.7.0.4
+- Languages: Java (JDK 13)
+- Libraries: Swing, AWT
+- Offline
+- LOC: 1460
 
 ---
 
