@@ -86,7 +86,7 @@ A few things to keep in mind when using commands:
 
 ## Tips and Tricks
 
-**Creating/loading mirror field**\
+**Creating/loading mirror field**
 
 *From the keyboard:*
 - When creating a new mirror field from the keyboard, you can enter numbers (1-9) to represent a group of spaces or the
