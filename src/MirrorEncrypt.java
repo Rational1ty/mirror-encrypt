@@ -24,6 +24,7 @@ public class MirrorEncrypt {
 
         displayMainMenu();
 
+        // Main menu loop
         while (choice != 0) {
             do {
                 out.print("\nEnter choice: ");
