@@ -71,20 +71,14 @@ public class Test {
                 spaces = "";
             }
 
-            // / or \
-            if (c == '/' || c == '\\') {
-                r += c;
-                continue;
-            }
-
             // n or N
             if (c == 'n' || c == 'N') {
-                int distToLineEnd = 13 - (i % 13) - 1;
+                int distToLineEnd = 13 - (i % 13);
                 r += " ".repeat(distToLineEnd);
                 continue;
             }
 
-            // space
+            // space, /, or \
             r += c;
         }
         
