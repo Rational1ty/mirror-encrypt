@@ -79,7 +79,7 @@ public class Test {
 
             // n or N
             if (c == 'n' || c == 'N') {
-                int distToLineEnd = 13 - (i % 13);
+                int distToLineEnd = 13 - (i % 13) - 1;
                 r += " ".repeat(distToLineEnd);
                 continue;
             }
