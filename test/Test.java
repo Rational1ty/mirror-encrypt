@@ -90,7 +90,7 @@ public class Test {
         
         // Trim r to the correct length if it's too long
         if (r.length() > flen) {
-            r = r.substring(0, flen + 1);
+            r = r.substring(0, flen);
         }
         
         return r.toCharArray();
