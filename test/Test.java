@@ -31,6 +31,11 @@ public class Test {
     // If [mirrors] contains the letter n, it will be parsed as a newline character
     static char[] toMirrorField(String mirrors) throws IllegalArgumentException {
         final int flen = 169;
+
+        if (mirrors.equals("")) {
+            return new char[flen];
+        }
+
         String field = "";
 
         // Check for any invalid characters
@@ -51,8 +56,6 @@ public class Test {
 
         // If user entered any numbers in mirrors, convert them to spaces
         // Ex: /5/ becomes /     /
-        // Also, if user entered the letter 'n' convert it to a newline character
-        // Ex: /n/ becomes /\n/
         String r = "";
         String spaces = "";
         for (int i = 0; i < field.length(); i++) {
@@ -69,13 +72,6 @@ public class Test {
                 int buffer = Integer.parseInt(spaces);
                 r += " ".repeat(buffer);
                 spaces = "";
-            }
-
-            // n or N
-            if (c == 'n' || c == 'N') {
-                int distToLineEnd = 13 - (i % 13);
-                r += " ".repeat(distToLineEnd);
-                continue;
             }
 
             // space, /, or \
