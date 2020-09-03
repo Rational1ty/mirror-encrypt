@@ -44,6 +44,10 @@ public class MirrorEncrypt {
                         out.print("Enter message to encrypt: ");
                         message = kb.nextLine();
 
+                        if (message.isEmpty()) {
+                            message = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        }
+
                         out.print("Encrypted message: ");
                         out.println(encrypt(message, beam));
 
