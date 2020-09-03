@@ -171,7 +171,7 @@ public class MirrorEncrypt {
                     break;
                 case 2:
                     out.print("Enter file path or name: ");
-                    String path = kb.nextLine();
+                    String path = "..\\" + kb.nextLine();
 
                     try {
                         return new Beam(new File(path));
@@ -204,10 +204,8 @@ public class MirrorEncrypt {
         return new Beam();
     }
 
-    // TODO: update comments on/in this method
     // Converts a String of any length to a char array of length 169 (13^2)
     // If [mirrors] contains any integers, they will be parsed as the respective number of spaces
-    // If [mirrors] contains the letter n, it will be parsed as a newline character
     static char[] toMirrorField(String mirrors) throws IllegalArgumentException {
         final int flen = 169;
 
