@@ -40,7 +40,7 @@ public class MirrorEncrypt {
                 switch (choice) {
                     case 0: 
                         break;
-                    case 1: // Encrypt message
+                    case 1:     // Encrypt message
                         out.print("Enter message to encrypt: ");
                         message = kb.nextLine();
 
@@ -56,7 +56,7 @@ public class MirrorEncrypt {
 
                         if (MirrorConstants.CREATE_WINDOW) show(message, beam, "encrypt");
                         break;
-                    case 2: // Decrypt message
+                    case 2:     // Decrypt message
                         out.print("Enter message to decrypt: ");
                         message = kb.nextLine();
 
@@ -68,7 +68,7 @@ public class MirrorEncrypt {
 
                         if (MirrorConstants.CREATE_WINDOW) show(message, beam, "decrypt");
                         break;
-                    case 3: // Display mirror field
+                    case 3:     // Display mirror field
                         out.println("\n  abcdefghijklm  ");
                         out.println("  -------------  ");
                         for (int y = 0; y < beam.field.length; y++) {
@@ -80,10 +80,15 @@ public class MirrorEncrypt {
                         out.println("  -------------  ");
                         out.println("  NOPQRSTUVWXYZ  ");
                         break;
-                    case 4: // Export mirror field
-                        out.print("Enter file to export to: ");
-                        String path = kb.nextLine();
-                        FileWriter fw = new FileWriter(path);
+                    case 4:     // Export mirror field
+                        out.print("Enter file name (will be saved in /assets/user): ");
+                        String fileName = kb.nextLine();
+
+                        if (!fileName.matches(".+\\.txt")) {
+                            fileName += ".txt";
+                        }
+                        FileWriter fw = new FileWriter("../assets/user/" + fileName);
+
                         for (int y = 0; y < beam.field.length; y++) {
                             for (int x = 0; x < beam.field[y].length; x++)
                                 fw.write(beam.field[y][x]);
@@ -91,7 +96,7 @@ public class MirrorEncrypt {
                         }
                         fw.close();
                         break;
-                    case 5: // Change mirror field
+                    case 5:     // Change mirror field
                         beam = createBeam(kb);
                         displayMainMenu();
                         break;
@@ -174,14 +179,20 @@ public class MirrorEncrypt {
                     }
                     break;
                 case 2:
-                    out.print("Enter file path or name: ");
-                    String path = "..\\" + kb.nextLine();
+                    boolean cont = true;
+                    while (cont) {
+                        out.print("Enter file name (will search in /assets/user): ");
+                        String path = "../assets/user/" + kb.nextLine();
 
-                    try {
-                        return new Beam(new File(path));
-                    } catch (FileNotFoundException ex) {
-                        out.println("File not found: " + ex.getMessage());
-                        System.exit(-1);
+                        if (!path.matches(".+\\.txt")) {
+                            path += ".txt";
+                        }
+
+                        try {
+                            return new Beam(new File(path));
+                        } catch (FileNotFoundException ex) {
+                            out.println("File not found: " + ex.getMessage());
+                        }
                     }
                     break;
                 case 3:
