@@ -1,5 +1,6 @@
 # CHANGELOG // mirror-encrypt
 
+<<<<<<< HEAD
 ### Current version (dev): 2.3.3
 ### Current version (stable): 2.2.3
 
@@ -24,6 +25,10 @@
 
 ## v2.0.0 | 07-01-2020
 ***The Colorful***
+=======
+## v2.0.0 | 07-15-2020
+*The Colorful*
+>>>>>>> e634fa266aa796f223949d0058881a5925b89e22
 - Added start-up commands option
 - Added a new menu option (6: *Enter commands*) to edit commands while running
 - The app can now be launched with `launcher.bat` instead of launching manually

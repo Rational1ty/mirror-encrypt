@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
+<<<<<<< HEAD
         @SuppressWarnings("resource")
         Scanner kb = new Scanner(System.in);
 
@@ -85,5 +86,7 @@ public class Test {
         }
         
         return r.toCharArray();
+=======
+>>>>>>> e634fa266aa796f223949d0058881a5925b89e22
     }
 }

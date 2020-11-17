@@ -231,8 +231,8 @@ public class MirrorEncrypt {
         String field = "";
 
         // Check for any invalid characters
-        // Accepted characters are: /, \, 0-9, n, and space
-        if (!mirrors.matches("[\\\\/0-9n\\s]*"))
+        // Accepted characters are: /, \, 0-9, and space
+        if (!mirrors.matches("[\\\\/0-9\\s]*"))
             throw new IllegalArgumentException("Invalid character entered; accepted characters are /, \\, 0-9, n, or space");
 
         // Put mirrors into field
