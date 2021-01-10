@@ -20,7 +20,7 @@ public abstract class MirrorConstants {
             case "beam":    // BEAM_COLOR
                 try {
                     Field f = Class.forName("java.awt.Color").getField(s[1]);
-                    BEAM_COLOR = (Color)f.get(null);
+                    BEAM_COLOR = (Color) f.get(null);
                 } catch (Exception ex) {
                     out.printf("Unrecognized command value: \"%s\"\n", s[1]);
                     System.exit(-1);
@@ -29,7 +29,7 @@ public abstract class MirrorConstants {
             case "color1":  // COLOR1
                 try {
                     Field f = Class.forName("java.awt.Color").getField(s[1]);
-                    COLOR1 = (Color)f.get(null);
+                    COLOR1 = (Color) f.get(null);
                 } catch (Exception ex) {
                     out.printf("Unrecognized command value: \"%s\"\n", s[1]);
                     System.exit(-1);
@@ -38,7 +38,7 @@ public abstract class MirrorConstants {
             case "color2":  // COLOR2
                 try {
                     Field f = Class.forName("java.awt.Color").getField(s[1]);
-                    COLOR2 = (Color)f.get(null);
+                    COLOR2 = (Color) f.get(null);
                 } catch (Exception ex) {
                     out.printf("Unrecognized command value: \"%s\"\n", s[1]);
                     System.exit(-1);

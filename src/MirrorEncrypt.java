@@ -54,7 +54,8 @@ public class MirrorEncrypt {
                         try { Thread.sleep(250); }
                         catch (InterruptedException ex) {}
 
-                        if (MirrorConstants.CREATE_WINDOW) show(message, beam, "encrypt");
+                        if (MirrorConstants.CREATE_WINDOW)
+                            show(message, beam, "encrypt");
                         break;
                     case 2:     // Decrypt message
                         out.print("Enter message to decrypt: ");
@@ -66,7 +67,8 @@ public class MirrorEncrypt {
                         try { Thread.sleep(250); }
                         catch (InterruptedException ex) {}
 
-                        if (MirrorConstants.CREATE_WINDOW) show(message, beam, "decrypt");
+                        if (MirrorConstants.CREATE_WINDOW)
+                            show(message, beam, "decrypt");
                         break;
                     case 3:     // Display mirror field
                         out.println("\n  abcdefghijklm  ");
