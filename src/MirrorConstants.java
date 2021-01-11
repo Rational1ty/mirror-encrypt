@@ -1,82 +1,78 @@
 package src;
 
-import static java.lang.System.out;
 import java.awt.Color;
+import java.io.IOException;
 import java.lang.Class;
-import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public abstract class MirrorConstants {
-    public static Color BEAM_COLOR = Color.RED;
-    public static Color COLOR1 = Color.RED;
-    public static Color COLOR2 = Color.GREEN;
-    public static boolean CREATE_WINDOW = true;
-    public static int DELAY = 50;
-    public static boolean REPEAT_SEQ = true;
+    public static final HashMap<MKey, MValue<?>> constants = new HashMap<MKey, MValue<?>>();
+    private static final Path path = Paths.get("../mirror.properties");
 
-    public static void parseCommand(String command) {
-        command = command.toLowerCase();
-        String[] s = command.split("[:]");
-        switch (s[0]) {
-            case "beam":    // BEAM_COLOR
-                try {
-                    Field f = Class.forName("java.awt.Color").getField(s[1]);
-                    BEAM_COLOR = (Color) f.get(null);
-                } catch (Exception ex) {
-                    out.printf("Unrecognized command value: \"%s\"\n", s[1]);
-                    System.exit(-1);
-                }
-                break;
-            case "color1":  // COLOR1
-                try {
-                    Field f = Class.forName("java.awt.Color").getField(s[1]);
-                    COLOR1 = (Color) f.get(null);
-                } catch (Exception ex) {
-                    out.printf("Unrecognized command value: \"%s\"\n", s[1]);
-                    System.exit(-1);
-                }
-                break;
-            case "color2":  // COLOR2
-                try {
-                    Field f = Class.forName("java.awt.Color").getField(s[1]);
-                    COLOR2 = (Color) f.get(null);
-                } catch (Exception ex) {
-                    out.printf("Unrecognized command value: \"%s\"\n", s[1]);
-                    System.exit(-1);
-                }
-                break;
-            case "window":  // CREATE_WINDOW
-                if (s[1].equals("true") || s[1].equals("false")) {
-                    CREATE_WINDOW = Boolean.parseBoolean(s[1]);
-                } else {
-                    out.printf("Unrecognized command value: \"%s\"\n", s[1]);
-                    System.exit(-1);
-                }
-                break;
-            case "delay":   // DELAY
-                try {
-                    DELAY = Integer.parseInt(s[1]);
-                } catch (NumberFormatException ex) {
-                    out.printf("Unrecognized command value: \"%s\"\n", s[1]);
-                    System.exit(-1);
-                }
-                break;
-            case "repeat":  // REPEAT_SEQ
-                if (s[1].equals("true") || s[1].equals("false")) {
-                    REPEAT_SEQ = Boolean.parseBoolean(s[1]);
-                } else {
-                    out.printf("Unrecognized command value: \"%s\"\n", s[1]);
-                    System.exit(-1);
-                }
-                break;
-            default:
-                out.printf("Unrecognized command key: \"%s\"\n", s[0]);
-                System.exit(-1);
+    static {
+        try {
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+                Files.write(path, Arrays.asList(new String[] {
+                    "beam_color:\t\t\tred",
+                    "trace_color:\t\tred",
+                    "success_color:\t\tgreen",
+                    "create_window:\t\ttrue",
+                    "repeat_sequence:\ttrue",
+                    "delay:\t\t\t\t50"
+                }));
+            }
+            loadProperties();
+        } catch (IOException ex) {
+            System.err.println("Error while accessing mirror.properties");
+            System.exit(0);
         }
     }
 
-    public static void parseCommands(String[] commands) {
-        if (commands.length > 0)
-            for (String command : commands)
-                parseCommand(command);
+    public static MValue<?> get(MKey key) {
+        return constants.get(key);
+    }
+
+    private static void loadProperties() throws IOException {
+        var lines = Files.readAllLines(path);
+        for (String line : lines) {
+            var kv = line.split(":\\s*");
+            MKey key = MKey.valueOf(kv[0].toUpperCase());
+            MValue<?> val = getValue(kv[1]);
+            if (val == null) {
+                throw new IOException();
+            }
+            constants.put(key, val);
+        }
+    }
+
+    private static MValue<?> getValue(String val) {
+        // If val is an integer
+        if (val.matches("\\b[0-9]+\\b")) {
+            return new MValue<Integer>(Integer.parseInt(val));
+        }
+
+        // If val is a boolean
+        if (val.matches("(?i)\\btrue|false\\b")) {
+            return new MValue<Boolean>(Boolean.parseBoolean(val));
+        }
+
+        // If val is a hex string representing a color
+        try {
+            Color c = Color.decode(val);
+            return new MValue<Color>(c);
+        } catch (NumberFormatException ex) {}
+
+        // If val is a named color (ex: red, green, blue)
+        try {
+            Color c = (Color) Class.forName("java.awt.Color").getField(val).get(null);
+            return new MValue<Color>(c);
+        } catch (ReflectiveOperationException ex) {
+            return null;
+        }
     }
 }

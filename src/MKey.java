@@ -1,0 +1,10 @@
+package src;
+
+public enum MKey {
+	BEAM_COLOR,
+	TRACE_COLOR,
+	SUCCESS_COLOR,
+	CREATE_WINDOW,
+	REPEAT_SEQUENCE,
+	DELAY
+}

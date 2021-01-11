@@ -7,15 +7,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import lib.Box;
-import lib.HLabel;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import lib.Box;
+import lib.HLabel;
 
 public final class DrawingPanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public Box[][] grid;
+    private Color beamColor = (Color) MirrorConstants.get(MKey.BEAM_COLOR).value;
     
     public DrawingPanel(Beam beam) {
         setBackground(Color.WHITE);
@@ -33,7 +36,11 @@ public final class DrawingPanel extends JPanel {
         for (int row = 2; row < grid.length - 2; row++) {
             for (int col = 2; col < grid[row].length - 2; col++) {
                 // Creates a new box at the proper x and y coordinates, with the value of the corresponding mirror
-                grid[row][col] = new Box(getX() + (col * Box.SCL), getY() + (row * Box.SCL), beam.field[row - 2][col - 2]);
+                grid[row][col] = new Box(
+                    getX() + (col * Box.SCL),
+                    getY() + (row * Box.SCL),
+                    beam.field[row - 2][col - 2]
+                );
             }
         }
 
@@ -194,7 +201,7 @@ public final class DrawingPanel extends JPanel {
             Box b = grid[1][x];
             b.content.forEach(c -> {
                 if (b.isLineHalfStep(c)) {
-                    g2d.setColor(MirrorConstants.BEAM_COLOR);
+                    g2d.setColor(beamColor);
                     g2d.draw(c);
                     g2d.setColor(Color.BLACK);
                 } else {
@@ -207,7 +214,7 @@ public final class DrawingPanel extends JPanel {
             Box b = grid[grid[grid.length - 2].length - 2][x];
             b.content.forEach(c -> {
                 if (b.isLineHalfStep(c)) {
-                    g2d.setColor(MirrorConstants.BEAM_COLOR);
+                    g2d.setColor(beamColor);
                     g2d.draw(c);
                     g2d.setColor(Color.BLACK);
                 } else {
@@ -236,7 +243,7 @@ public final class DrawingPanel extends JPanel {
             Box b = grid[y][1];
             b.content.forEach(c -> {
                 if (b.isLineHalfStep(c)) {
-                    g2d.setColor(MirrorConstants.BEAM_COLOR);
+                    g2d.setColor(beamColor);
                     g2d.draw(c);
                     g2d.setColor(Color.BLACK);
                 } else {
@@ -249,7 +256,7 @@ public final class DrawingPanel extends JPanel {
             Box b = grid[y][grid.length - 2];
             b.content.forEach(c -> {
                 if (b.isLineHalfStep(c)) {
-                    g2d.setColor(MirrorConstants.BEAM_COLOR);
+                    g2d.setColor(beamColor);
                     g2d.draw(c);
                     g2d.setColor(Color.BLACK);
                 } else {
@@ -266,7 +273,7 @@ public final class DrawingPanel extends JPanel {
     }
 
     private void drawBeam(Graphics2D g2d) {
-        g2d.setColor(MirrorConstants.BEAM_COLOR);
+        g2d.setColor(beamColor);
         for (int y = 2; y < grid.length - 2; y++) {
             for (int x = 2; x < grid[y].length - 2; x++) {
                 Box b = grid[y][x];

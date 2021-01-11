@@ -9,10 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class MirrorEncrypt {
+    // private static boolean createWindow = true;
+    // private static boolean repeatSeq = true;
+    // private static int delay = 50;
+    private static boolean createWindow = (boolean) MirrorConstants.get(MKey.CREATE_WINDOW).value;
+    private static boolean repeatSeq = (boolean) MirrorConstants.get(MKey.REPEAT_SEQUENCE).value;
+    private static int delay = (int) MirrorConstants.get(MKey.DELAY).value;
+
     public static void main(String[] args) throws IOException {
         Scanner kb = new Scanner(System.in);
-
-        MirrorConstants.parseCommands(args);
 
         // Setting up beam/mirrors
         Beam beam = createBeam(kb);
@@ -54,7 +59,7 @@ public class MirrorEncrypt {
                         try { Thread.sleep(250); }
                         catch (InterruptedException ex) {}
 
-                        if (MirrorConstants.CREATE_WINDOW)
+                        if (createWindow)
                             show(message, beam, "encrypt");
                         break;
                     case 2:     // Decrypt message
@@ -67,8 +72,8 @@ public class MirrorEncrypt {
                         try { Thread.sleep(250); }
                         catch (InterruptedException ex) {}
 
-                        if (MirrorConstants.CREATE_WINDOW)
-                            show(message, beam, "decrypt");
+                        if (createWindow)
+                        show(message, beam, "decrypt");
                         break;
                     case 3:     // Display mirror field
                         out.println("\n  abcdefghijklm  ");
@@ -105,7 +110,7 @@ public class MirrorEncrypt {
                     case 6:
                         out.print("Command(s): ");
                         String[] c = kb.nextLine().split("\\s+");
-                        MirrorConstants.parseCommands(c);
+                        // MirrorConstants.parseCommands(c);
                         out.println((c.length > 1 ? "Commands" : "Command") + " executed");
                         break;
                     default:
@@ -145,7 +150,7 @@ public class MirrorEncrypt {
     // The window will close after the encryption/decoding is complete and can be closed at any time
     // [op] should either be "encrypt" or "decode"
     static void show(String text, Beam beam, String op) {
-        new Master(text, beam, op, MirrorConstants.DELAY);
+        new Master(text, beam, op, delay);
     }
 
     // Creates a new mirror field and returns a Beam initialized with that field
@@ -238,7 +243,7 @@ public class MirrorEncrypt {
             throw new IllegalArgumentException("Invalid character entered; accepted characters are /, \\, 0-9, n, or space");
 
         // Put mirrors into field
-        if (MirrorConstants.REPEAT_SEQ) {
+        if (repeatSeq) {
             // Repeat the sequence until field is full
             // Always repeat until field length > flen, then trim so that field length = flen
             field = mirrors.repeat( (int) Math.ceil( (double) flen / mirrors.length() ) );
