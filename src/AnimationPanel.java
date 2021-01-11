@@ -118,7 +118,7 @@ public final class AnimationPanel extends JPanel {
         tracing = true;
 
         // Highlight the character that the beam is starting from in TRACE_COLOR
-        Color color1 = (Color) MirrorConstants.get(MKey.TRACE_COLOR).value;
+        Color color1 = (Color) MirrorConstants.get("trace_color");
         switch (beam.dir) {
             case 'U':
                 dpanel.grid[beam.row + 3][beam.col + 2].setHighlight(color1, Box.HALF_TOP);
@@ -155,7 +155,7 @@ public final class AnimationPanel extends JPanel {
         );
 
         // Highlight the character that the beam impacted in SUCCESS_COLOR
-        Color color2 = (Color) MirrorConstants.get(MKey.SUCCESS_COLOR).value;
+        Color color2 = (Color) MirrorConstants.get("success_color");
         switch (beam.dir) {
             case 'U':
                 dpanel.grid[beam.row + 1][beam.col + 2].setHighlight(color2, Box.HALF_BOTTOM);

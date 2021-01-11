@@ -18,7 +18,7 @@ public final class DrawingPanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public Box[][] grid;
-    private Color beamColor = (Color) MirrorConstants.get(MKey.BEAM_COLOR).value;
+    private Color beamColor = (Color) MirrorConstants.get("beam_color");
     
     public DrawingPanel(Beam beam) {
         setBackground(Color.WHITE);

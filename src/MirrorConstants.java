@@ -7,10 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Properties;
 
-public abstract class MirrorConstants {
-    public static final HashMap<MKey, MValue<?>> constants = new HashMap<MKey, MValue<?>>();
+public final class MirrorConstants {
+    private static final Properties constants = new Properties();
     private static final Path path = Paths.get("../mirror.properties");
 
     static {
@@ -21,58 +21,51 @@ public abstract class MirrorConstants {
                     "beam_color:\t\t\tred",
                     "trace_color:\t\tred",
                     "success_color:\t\tgreen",
-                    "create_window:\t\ttrue",
-                    "repeat_sequence:\ttrue",
+                    "create_window:\t\t1",
+                    "repeat_sequence:\t1",
                     "delay:\t\t\t\t50"
                 }));
             }
-            loadProperties();
+            constants.load(Files.newInputStream(path));
         } catch (IOException ex) {
             System.err.println("Error while accessing mirror.properties");
             System.exit(0);
         }
     }
 
-    public static MValue<?> get(MKey key) {
-        return constants.get(key);
-    }
+    private MirrorConstants() {}
 
-    private static void loadProperties() throws IOException {
-        var lines = Files.readAllLines(path);
-        for (String line : lines) {
-            var kv = line.split(":\\s*");
-            MKey key = MKey.valueOf(kv[0].toUpperCase());
-            MValue<?> val = getValue(kv[1]);
-            if (val == null) {
-                throw new IOException();
-            }
-            constants.put(key, val);
+    public static Object get(String key) {
+        String value = constants.getProperty(key);
+        Object res = getTypedValue(value);
+        if (res == null) {
+            System.err.println("Error while accessing application constants; check mirror.properties");
+            System.exit(0);
         }
+        return res;
     }
 
-    private static MValue<?> getValue(String val) {
+    private static Object getTypedValue(String val) {
         // If val is an integer
         if (val.matches("\\b[0-9]+\\b")) {
-            return new MValue<Integer>(Integer.parseInt(val));
+            return Math.abs(Integer.parseInt(val));
         }
 
         // If val is a boolean
-        if (val.matches("(?i)\\btrue|false\\b")) {
-            return new MValue<Boolean>(Boolean.parseBoolean(val));
-        }
+        // if (val.matches("(?i)\\btrue|false\\b")) {
+        //     return Boolean.parseBoolean(val);
+        // }
 
         // If val is a hex string representing a color
         try {
-            Color c = Color.decode(val);
-            return new MValue<Color>(c);
+            return Color.decode(val);
         } catch (NumberFormatException ex) {}
 
         // If val is a named color (ex: red, green, blue)
         try {
-            Color c = (Color) Class.forName("java.awt.Color").getField(val).get(null);
-            return new MValue<Color>(c);
-        } catch (ReflectiveOperationException ex) {
-            return null;
-        }
+            return (Color) Class.forName("java.awt.Color").getField(val).get(null);
+        } catch (ReflectiveOperationException ex) {}
+
+        return null;
     }
 }

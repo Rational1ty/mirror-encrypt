@@ -9,12 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class MirrorEncrypt {
-    // private static boolean createWindow = true;
-    // private static boolean repeatSeq = true;
-    // private static int delay = 50;
-    private static boolean createWindow = (boolean) MirrorConstants.get(MKey.CREATE_WINDOW).value;
-    private static boolean repeatSeq = (boolean) MirrorConstants.get(MKey.REPEAT_SEQUENCE).value;
-    private static int delay = (int) MirrorConstants.get(MKey.DELAY).value;
+    private static boolean createWindow = (int) MirrorConstants.get("create_window") != 0;
+    private static boolean repeatSeq = (int) MirrorConstants.get("repeat_sequence") != 0;
+    private static int delay = (int) MirrorConstants.get("delay");
 
     public static void main(String[] args) throws IOException {
         Scanner kb = new Scanner(System.in);
