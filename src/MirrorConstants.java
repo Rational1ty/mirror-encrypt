@@ -7,25 +7,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
 public final class MirrorConstants {
     private static final Properties constants = new Properties();
     private static final Path path = Paths.get("../mirror.properties");
+    private static final String[] keys = {"delay", "create_window", "repeat_sequence", "beam_color", "trace_color", "success_color"};
+    private static final String[] defaults = {"50", "1", "1", "red", "red", "green"};
 
     static {
         try {
             if (!Files.exists(path)) {
+                // Pair each key with its default value, formatted and separated by a colon
+                String[] lines = new String[keys.length];
+                for (int i = 0; i < lines.length; i++) {
+                    lines[i] = String.format("%-16s %s", keys[i] + ":", defaults[i]);
+                }
+
+                // Create mirror.properties in root directory and write default k:v pairs
                 Files.createFile(path);
-                Files.write(path, Arrays.asList(new String[] {
-                    "beam_color:\t\t\tred",
-                    "trace_color:\t\tred",
-                    "success_color:\t\tgreen",
-                    "create_window:\t\t1",
-                    "repeat_sequence:\t1",
-                    "delay:\t\t\t\t50"
-                }));
+                Files.write(path, Arrays.asList(lines));
             }
             constants.load(Files.newInputStream(path));
         } catch (IOException ex) {
@@ -36,8 +37,8 @@ public final class MirrorConstants {
         // Register hook to save constants to mirror.properties on shutdown
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                System.out.println(constants.propertyNames());
-            } catch (Exception ex) {    // TODO: change to IOException when possible
+                storeProperties();
+            } catch (IOException ex) {
                 System.err.println("Error while accessing file \"mirror.properties\". Some properties may not have been saved.");
             }
         }));
@@ -87,7 +88,15 @@ public final class MirrorConstants {
         constants.setProperty(key, value);
     }
 
-    private static void store() throws IOException {
-        
+    private static void storeProperties() throws IOException {
+        String[] lines = new String[keys.length];
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = String.format(
+                "%-16s %s",
+                keys[i] + ":",
+                constants.getProperty(keys[i])
+            );
+        }
+        Files.write(path, Arrays.asList(lines));
     }
 }
