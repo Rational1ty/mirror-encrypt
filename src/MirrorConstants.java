@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public final class MirrorConstants {
@@ -28,33 +29,46 @@ public final class MirrorConstants {
             }
             constants.load(Files.newInputStream(path));
         } catch (IOException ex) {
-            System.err.println("Error while accessing mirror.properties");
+            System.err.println("Error while accessing file \"mirror.properties\".");
             System.exit(0);
         }
+
+        // Register hook to save constants to mirror.properties on shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                System.out.println(constants.propertyNames());
+            } catch (Exception ex) {    // TODO: change to IOException when possible
+                System.err.println("Error while accessing file \"mirror.properties\". Some properties may not have been saved.");
+            }
+        }));
     }
 
     private MirrorConstants() {}
 
     public static Object get(String key) {
-        String value = constants.getProperty(key);
-        Object res = getTypedValue(value);
+        Object res;
+        
+        if (constants.stringPropertyNames().contains(key)) {
+            String value = constants.getProperty(key);
+            res = getTypedValue(value);
+        } else {
+            res = null;
+        }
+
         if (res == null) {
-            System.err.println("Error while accessing application constants; check mirror.properties");
+            System.err.println("Error while accessing application constants. Check file \"mirror.properties\" for invalid keys/values.");
             System.exit(0);
         }
         return res;
     }
 
     private static Object getTypedValue(String val) {
+        if (val == null) return null;
+
         // If val is an integer
         if (val.matches("\\b[0-9]+\\b")) {
             return Math.abs(Integer.parseInt(val));
         }
-
-        // If val is a boolean
-        // if (val.matches("(?i)\\btrue|false\\b")) {
-        //     return Boolean.parseBoolean(val);
-        // }
 
         // If val is a hex string representing a color
         try {
@@ -67,5 +81,13 @@ public final class MirrorConstants {
         } catch (ReflectiveOperationException ex) {}
 
         return null;
+    }
+
+    public static void set(String key, String value) {
+        constants.setProperty(key, value);
+    }
+
+    private static void store() throws IOException {
+        
     }
 }

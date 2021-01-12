@@ -1,26 +1,22 @@
 package src;
 
 import static java.lang.System.out;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class MirrorEncrypt {
-    private static boolean createWindow = (int) MirrorConstants.get("create_window") != 0;
-    private static boolean repeatSeq = (int) MirrorConstants.get("repeat_sequence") != 0;
-    private static int delay = (int) MirrorConstants.get("delay");
-
     public static void main(String[] args) throws IOException {
         Scanner kb = new Scanner(System.in);
 
-        // Setting up beam/mirrors
+        // Setting up beam/mirrors menu
         Beam beam = createBeam(kb);
         
         // Main menu, handles encryption, decoding, and displaying the mirror field
-        // After printing the menu, this section will repeat indefinitely until the user enters the number 5
+        // After printing the menu, this section will repeat until 0 is entered
         byte choice = -1;
         String message;
 
@@ -38,6 +34,8 @@ public class MirrorEncrypt {
                     kb.nextLine();
                     continue;
                 }
+
+                boolean createWindow = (int) MirrorConstants.get("create_window") != 0;
 
                 switch (choice) {
                     case 0: 
@@ -70,7 +68,7 @@ public class MirrorEncrypt {
                         catch (InterruptedException ex) {}
 
                         if (createWindow)
-                        show(message, beam, "decrypt");
+                            show(message, beam, "decrypt");
                         break;
                     case 3:     // Display mirror field
                         out.println("\n  abcdefghijklm  ");
@@ -85,7 +83,7 @@ public class MirrorEncrypt {
                         out.println("  NOPQRSTUVWXYZ  ");
                         break;
                     case 4:     // Export mirror field
-                        out.print("Enter file name (will be saved in /assets/user): ");
+                        out.print("Enter file name (will be saved in assets/user/): ");
                         String fileName = kb.nextLine();
 
                         if (!fileName.matches(".+\\.txt")) {
@@ -105,10 +103,13 @@ public class MirrorEncrypt {
                         displayMainMenu();
                         break;
                     case 6:
-                        out.print("Command(s): ");
-                        String[] c = kb.nextLine().split("\\s+");
-                        // MirrorConstants.parseCommands(c);
-                        out.println((c.length > 1 ? "Commands" : "Command") + " executed");
+                        out.print("Enter command(s): ");
+                        String[] commands = kb.nextLine().split("\\s+");
+                        for (String cmd : commands) {
+                            var kv = cmd.split("[:=]");
+                            MirrorConstants.set(kv[0], kv[1]);
+                        }
+                        out.println((commands.length > 1 ? "Commands" : "Command") + " executed");
                         break;
                     default:
                         out.println(choice + " is not a valid choice");
@@ -147,6 +148,7 @@ public class MirrorEncrypt {
     // The window will close after the encryption/decoding is complete and can be closed at any time
     // [op] should either be "encrypt" or "decode"
     static void show(String text, Beam beam, String op) {
+        int delay = (int) MirrorConstants.get("delay");
         new Master(text, beam, op, delay);
     }
 
@@ -240,10 +242,11 @@ public class MirrorEncrypt {
             throw new IllegalArgumentException("Invalid character entered; accepted characters are /, \\, 0-9, n, or space");
 
         // Put mirrors into field
+        boolean repeatSeq = (int) MirrorConstants.get("repeat_sequence") != 0;
         if (repeatSeq) {
             // Repeat the sequence until field is full
             // Always repeat until field length > flen, then trim so that field length = flen
-            field = mirrors.repeat( (int) Math.ceil( (double) flen / mirrors.length() ) );
+            field = mirrors.repeat((int) Math.ceil((double) flen / mirrors.length()));
             field = field.substring(0, flen);
         } else {
             // Otherwise, fill the rest of field with spaces
