@@ -1,6 +1,6 @@
 @echo off
 
-echo Launching MirrorEncrypt.java...
+echo Launching mirror-encrypt...
 
 :: Make sure to launch from the correct location
 cd %~dp0
@@ -13,16 +13,22 @@ cd lib && ^
 javac -d ../bin -cp ../bin *.java && ^
 cd ../src && ^
 javac -d ../bin -cp ../bin *.java
-if errorlevel 1 goto:fatal
+if errorlevel 1 goto:fatal1
 
 :: Run the program
 cd ../bin
 java src.MirrorEncrypt
-if errorlevel 1 goto:fatal
+if errorlevel 1 goto:fatal2
 
 cmd /k
 goto:eof
 
-:fatal
+:fatal1
 echo A fatal error occurred while launching
+pause
+goto:eof
+
+:fatal2
+echo(
+echo A fatal error occurred
 pause
