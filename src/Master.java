@@ -15,8 +15,6 @@ import javax.swing.Timer;
 
 import lib.HLabel;
 
-//import java.io.*;
-
 public final class Master extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
