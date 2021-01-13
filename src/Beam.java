@@ -2,15 +2,16 @@ package src;
 
 import java.io.File;
 import java.io.IOException;
-import lib.Box;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import lib.Box;
+
 public final class Beam {
-    public static final int BEAM_HORIZ = 0;
-    public static final int BEAM_VERT = 1;
-    public static final int BEAM_REFLECT_FORWARD = 2;
-    public static final int BEAM_REFLECT_BACKWARD = 3;
+    public static final int HORIZ = 0;
+    public static final int VERT = 1;
+    public static final int REFLECT_FORWARD = 2;
+    public static final int REFLECT_BACKWARD = 3;
 
     public int row, col;
     public char dir, prevDir;
@@ -76,15 +77,16 @@ public final class Beam {
             }
             if (field[row][col] == '\\' || field[row][col] == '/') {
                 mirror(field[row][col]);
-                prevOp = field[row][col] == '/' ? BEAM_REFLECT_FORWARD : BEAM_REFLECT_BACKWARD;
+                prevOp = field[row][col] == '/' ? REFLECT_FORWARD : REFLECT_BACKWARD;
             } else {
                 if (dir == 'L' || dir == 'R')
-                    prevOp = BEAM_HORIZ;
+                    prevOp = HORIZ;
                 else
-                    prevOp = BEAM_VERT;
+                    prevOp = VERT;
             }
             count++;
         } while (count < 1000);
+
         return '?';
     }
 
@@ -97,14 +99,13 @@ public final class Beam {
         }
         if (field[row][col] == '\\' || field[row][col] == '/') {
             mirror(field[row][col]);
-            prevOp = field[row][col] == '/' ? BEAM_REFLECT_FORWARD : BEAM_REFLECT_BACKWARD;
+            prevOp = field[row][col] == '/' ? REFLECT_FORWARD : REFLECT_BACKWARD;
         } else {
             if (dir == 'L' || dir == 'R')
-                prevOp = BEAM_HORIZ;
+                prevOp = HORIZ;
             else
-                prevOp = BEAM_VERT;
+                prevOp = VERT;
         }
-        return;
     }
 
     // Prepares the beam to either trace a path or trace steps
@@ -122,40 +123,40 @@ public final class Beam {
     // The frames in the returned array are in chronological order
     public int[] getAnimationFrames() {
         switch (prevOp) {
-            case BEAM_HORIZ:
+            case HORIZ:
                 if (prevDir == 'R')
-                    return new int[]{Box.HALF_LEFT, Box.HALF_RIGHT};
+                    return new int[] {Box.HALF_LEFT, Box.HALF_RIGHT};
                 if (prevDir == 'L')
-                    return new int[]{Box.HALF_RIGHT, Box.HALF_LEFT};
+                    return new int[] {Box.HALF_RIGHT, Box.HALF_LEFT};
                 break;
-            case BEAM_VERT:
+            case VERT:
                 if (prevDir == 'D')
-                    return new int[]{Box.HALF_TOP, Box.HALF_BOTTOM};
+                    return new int[] {Box.HALF_TOP, Box.HALF_BOTTOM};
                 if (prevDir == 'U')
-                    return new int[]{Box.HALF_BOTTOM, Box.HALF_TOP};
+                    return new int[] {Box.HALF_BOTTOM, Box.HALF_TOP};
                 break;
-            case BEAM_REFLECT_FORWARD:
+            case REFLECT_FORWARD:
                 if (prevDir == 'D')
-                    return new int[]{Box.HALF_TOP, Box.HALF_LEFT};
+                    return new int[] {Box.HALF_TOP, Box.HALF_LEFT};
                 if (prevDir == 'U')
-                    return new int[]{Box.HALF_BOTTOM, Box.HALF_RIGHT};
+                    return new int[] {Box.HALF_BOTTOM, Box.HALF_RIGHT};
                 if (prevDir == 'R')
-                    return new int[]{Box.HALF_LEFT, Box.HALF_TOP};
+                    return new int[] {Box.HALF_LEFT, Box.HALF_TOP};
                 if (prevDir == 'L')
-                    return new int[]{Box.HALF_RIGHT, Box.HALF_BOTTOM};
+                    return new int[] {Box.HALF_RIGHT, Box.HALF_BOTTOM};
                 break;
-            case BEAM_REFLECT_BACKWARD:
+            case REFLECT_BACKWARD:
                 if (prevDir == 'D')
-                    return new int[]{Box.HALF_TOP, Box.HALF_RIGHT};
+                    return new int[] {Box.HALF_TOP, Box.HALF_RIGHT};
                 if (prevDir == 'U')
-                    return new int[]{Box.HALF_BOTTOM, Box.HALF_LEFT};
+                    return new int[] {Box.HALF_BOTTOM, Box.HALF_LEFT};
                 if (prevDir == 'R')
-                    return new int[]{Box.HALF_LEFT, Box.HALF_BOTTOM};
+                    return new int[] {Box.HALF_LEFT, Box.HALF_BOTTOM};
                 if (prevDir == 'L')
-                    return new int[]{Box.HALF_RIGHT, Box.HALF_TOP};
+                    return new int[] {Box.HALF_RIGHT, Box.HALF_TOP};
                 break;
         }
-        return new int[]{-1, -1};
+        return new int[] {-1, -1};
     }
 
     // ------------------------------------------------------------------- Private methods
@@ -235,18 +236,14 @@ public final class Beam {
 
     // Returns the char at (col, row) or '?' if not on the border
     public char getChar() {
-        if (col == -1) {
-            return (char)(row + 65);
-        }
-        if (col == 13) {
-            return (char)(row + 110);
-        }
-        if (row == -1) {
-            return (char)(col + 97);
-        }
-        if (row == 13) {
-            return (char)(col + 78);
-        }
+        if (col == -1)
+            return (char) (row + 65);
+        if (col == 13)
+            return (char) (row + 110);
+        if (row == -1)
+            return (char) (col + 97);
+        if (row == 13)
+            return (char) (col + 78);
         return '?';
     }
 }

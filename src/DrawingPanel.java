@@ -55,17 +55,17 @@ public final class DrawingPanel extends JPanel {
     private void initBorderEdge() {
         // Iterates over the left/right edges of the border and sets them accordingly
         for (int i = 2; i < grid.length - 2; i++) {
-            grid[i][0] = new Box(getX(), getY() + (i * Box.SCL), (char)(i + 63));
+            grid[i][0] = new Box(getX(), getY() + (i * Box.SCL), (char) (i + 63));
             grid[i][1] = new Box(getX() + Box.SCL, getY() + (i * Box.SCL), '|');
             grid[i][grid[i].length - 2] = new Box(getX() + ((grid[i].length - 2) * Box.SCL), getY() + (i * Box.SCL), '|');
-            grid[i][grid[i].length - 1] = new Box(getX() + ((grid[i].length - 1) * Box.SCL), getY() + (i * Box.SCL), (char)(i + 108));
+            grid[i][grid[i].length - 1] = new Box(getX() + ((grid[i].length - 1) * Box.SCL), getY() + (i * Box.SCL), (char) (i + 108));
         }
         // Iterates over the top/bottom edges of the border and sets them accordingly
         for (int i = 2; i < grid[0].length - 2; i++) {
-            grid[0][i] = new Box(getX() + (i * Box.SCL), getY(), (char)(i + 95));
+            grid[0][i] = new Box(getX() + (i * Box.SCL), getY(), (char) (i + 95));
             grid[1][i] = new Box(getX() + (i * Box.SCL), getY() + Box.SCL, '-');
             grid[grid.length - 2][i] = new Box(getX() + (i * Box.SCL), getY() + ((grid.length - 2) * Box.SCL), '-');
-            grid[grid.length - 1][i] = new Box(getX() + (i * Box.SCL), getY() + ((grid.length - 1) * Box.SCL), (char)(i + 76));
+            grid[grid.length - 1][i] = new Box(getX() + (i * Box.SCL), getY() + ((grid.length - 1) * Box.SCL), (char) (i + 76));
         }
 
         addEdgeStyleLines();

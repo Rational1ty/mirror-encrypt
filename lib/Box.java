@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Box {
     // Box constants
     public static final int SCL = 30;
+    private static final int HALF = SCL / 2;
 
     public static final int HALF_LEFT = 0;
     public static final int HALF_TOP = 1;
@@ -45,8 +46,8 @@ public class Box {
         initNormals();
         initSpecials();
         
-        content = new ArrayList<Line2D.Float>(val == ' ' ? 0 : 1);
         numParts = val == ' ' ? 0 : 1;
+        content = new ArrayList<Line2D.Float>(numParts);
         switch (val) {
             case '/':
                 content.add(normals[0]);
@@ -68,33 +69,33 @@ public class Box {
     private void initNormals() {
         normals[0] = new Line2D.Float(x, y + SCL, x + SCL, y);                      // "/"
         normals[1] = new Line2D.Float(x, y, x + SCL, y + SCL);                      // "\"
-        normals[2] = new Line2D.Float(x + (SCL / 2), y, x + (SCL / 2), y + SCL);    // "|"
-        normals[3] = new Line2D.Float(x, y + (SCL / 2), x + SCL, y + (SCL / 2));    // "-"
+        normals[2] = new Line2D.Float(x + HALF, y, x + HALF, y + SCL);    // "|"
+        normals[3] = new Line2D.Float(x, y + HALF, x + SCL, y + HALF);    // "-"
     }
 
     private void initSpecials() {
-        specials[0] = new Line2D.Float(x, y + (SCL / 2), x + (SCL / 2), y + (SCL / 2));         // HALF_LEFT
-        specials[1] = new Line2D.Float(x + (SCL / 2), y, x + (SCL / 2), y + (SCL / 2));         // HALF_TOP
-        specials[2] = new Line2D.Float(x + (SCL / 2), y + (SCL / 2), x + SCL, y + (SCL / 2));   // HALF_RIGHT
-        specials[3] = new Line2D.Float(x + (SCL / 2), y + (SCL / 2), x + (SCL / 2), y + SCL);   // HALF_BOTTOM
+        specials[0] = new Line2D.Float(x, y + HALF, x + HALF, y + HALF);         // HALF_LEFT
+        specials[1] = new Line2D.Float(x + HALF, y, x + HALF, y + HALF);         // HALF_TOP
+        specials[2] = new Line2D.Float(x + HALF, y + HALF, x + SCL, y + HALF);   // HALF_RIGHT
+        specials[3] = new Line2D.Float(x + HALF, y + HALF, x + HALF, y + SCL);   // HALF_BOTTOM
 
-        specials[4] = new Line2D.Float(x, y, x, y + (SCL / 2));                     // LINED_VERT_HALF_TOP left line
-        specials[5] = new Line2D.Float(x + SCL, y, x + SCL, y + (SCL / 2));         // LINED_VERT_HALF_TOP right line
+        specials[4] = new Line2D.Float(x, y, x, y + HALF);                     // LINED_VERT_HALF_TOP left line
+        specials[5] = new Line2D.Float(x + SCL, y, x + SCL, y + HALF);         // LINED_VERT_HALF_TOP right line
 
-        specials[6] = new Line2D.Float(x, y + (SCL / 2), x, y + SCL);               // LINED_VERT_HALF_BOTTOM left line
-        specials[7] = new Line2D.Float(x + SCL, y + (SCL / 2), x + SCL, y + SCL);   // LINED_VERT_HALF_BOTTOM right line
+        specials[6] = new Line2D.Float(x, y + HALF, x, y + SCL);               // LINED_VERT_HALF_BOTTOM left line
+        specials[7] = new Line2D.Float(x + SCL, y + HALF, x + SCL, y + SCL);   // LINED_VERT_HALF_BOTTOM right line
 
-        specials[8] = new Line2D.Float(x, y, x + (SCL / 2), y);                     // LINED_HORIZ_HALF_LEFT top line
-        specials[9] = new Line2D.Float(x, y + SCL, x + (SCL / 2), y + SCL);         // LINED_HORIZ_HALF_LEFT bottom line
+        specials[8] = new Line2D.Float(x, y, x + HALF, y);                     // LINED_HORIZ_HALF_LEFT top line
+        specials[9] = new Line2D.Float(x, y + SCL, x + HALF, y + SCL);         // LINED_HORIZ_HALF_LEFT bottom line
 
-        specials[10] = new Line2D.Float(x + (SCL / 2), y, x + SCL, y);              // LINED_HORIZ_HALF_RIGHT top line
-        specials[11] = new Line2D.Float(x + (SCL / 2), y + SCL, x + SCL, y + SCL);  // LINED_HORIZ_HALF_RIGHT bottom line
+        specials[10] = new Line2D.Float(x + HALF, y, x + SCL, y);              // LINED_HORIZ_HALF_RIGHT top line
+        specials[11] = new Line2D.Float(x + HALF, y + SCL, x + SCL, y + SCL);  // LINED_HORIZ_HALF_RIGHT bottom line
     }
 
     // Adds the content from the corresponding Box special constant to this.content while leaving all of this box's other content intact
     public void addContent(int special) {
         if (special >= 0 && special <= 3) {
-            content.add(this.specials[special]);
+            content.add(specials[special]);
             numParts++;
         }
     }
@@ -111,6 +112,7 @@ public class Box {
     // "Extra content" is any content that does not represent this box's value property
     public void revert() {
         content.clear();
+
         if (value == '/')
             content.add(normals[0]);
         if (value == '\\')
@@ -119,6 +121,7 @@ public class Box {
             content.add(normals[2]);
         if (value == '-')
             content.add(normals[3]);
+
         numParts = 1;
         highlight = null;
         hlArea = null;
@@ -128,16 +131,16 @@ public class Box {
         highlight = c;
         switch (area) {
             case HALF_LEFT:
-                hlArea = new Rectangle2D.Float(x, y, SCL / 2f, SCL);
+                hlArea = new Rectangle2D.Float(x, y, HALF, SCL);
                 break;
             case HALF_TOP:
-                hlArea = new Rectangle2D.Float(x, y, SCL, SCL / 2f);
+                hlArea = new Rectangle2D.Float(x, y, SCL, HALF);
                 break;
             case HALF_RIGHT:
-                hlArea = new Rectangle2D.Float(x + (SCL / 2f), y, SCL, SCL);
+                hlArea = new Rectangle2D.Float(x + HALF, y, SCL, SCL);
                 break;
             case HALF_BOTTOM:
-                hlArea = new Rectangle2D.Float(x, y + (SCL / 2f), SCL, SCL);
+                hlArea = new Rectangle2D.Float(x, y + HALF, SCL, SCL);
                 break;
         }
     }

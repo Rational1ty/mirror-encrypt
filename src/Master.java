@@ -6,12 +6,14 @@ import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import lib.HLabel;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+
+import lib.HLabel;
 
 //import java.io.*;
 
