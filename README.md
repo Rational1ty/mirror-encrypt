@@ -7,7 +7,7 @@ Encrypt or decode messages using a grid of mirrors and a laser
 - It includes various ways to create your own unique sets of mirrors (mirror fields), load fields that you've already made,
   generate mirrors automatically, or save some of your favorite combinations
 - The program also animates the process in real time, unless it is run in text-only mode (see commands for more info)
-- To run the program, double-click on the file "launcher.bat"
+- To run the program, double-click on the file `launch.bat`
 - Additionally, you can customize many parts of the program using commands. A full list of commands, what they do,
   and how to use them can be found below
 
