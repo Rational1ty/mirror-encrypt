@@ -2,7 +2,7 @@
 
 Encrypt or decode messages using a grid of mirrors and a laser
 
-**Overview:**
+### Overview
 - This program provides an interesting way to encrypt/decrypt messages using mirrors and LASER BEAMS!
 - It includes various ways to create your own unique sets of mirrors (mirror fields), load fields that you've already made,
   generate mirrors automatically, or save some of your favorite combinations
@@ -11,7 +11,7 @@ Encrypt or decode messages using a grid of mirrors and a laser
 - Additionally, you can customize many parts of the program using commands. A full list of commands, what they do,
   and how to use them can be found below
 
-**Info:**
+### Info
 - Author: Matthew Davidson (mdavidson390@outlook.com)
 - Version: 2.2.0
 - Languages: Java (JDK 13)
@@ -58,32 +58,25 @@ Encrypt or decode messages using a grid of mirrors and a laser
     - Ex: `/\/7/\` translates to `/\/       /\`
     
 2. From a file
-  - You can create your own mirror fields by using notepad or any other simple text editor - get creative!
-  - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a";
+  - You can create your own mirror fields by using notepad or any other simple text editor
+  - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a" —
     it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
-  - Save it as a ".txt" file in the program's "assets" folder for easy access
-  - When running the program, you can load saved mirror fields by entering "../assets/fileName.txt" when prompted
-  - When exporting a set of mirrors using the "Export mirror field" option, save it as "../assets/fileName.txt" when asked
+  - Save it as a `.txt` file in the `assets/user/` folder
+  - When running the program, you can load saved mirror fields by entering the filename when prompted
   
 3. Randomly generated
   - When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
     different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
-    better. Try to find the perfect amount of mirrors to create the most unpredictable encryption!
+    better. Try to find the perfect amount of mirrors to create the most unpredictable code!
 
 **Main menu**
-- Although there are seperate options for encrypting and decrypting, the process is acutally the same for both. This means
-  that you can easily trace a path through the mirrors by yourself to create an encrypted message, then check the result
-  using the program. Try creating some messages on your own!
-- Sometimes, the animated window will be created in the background whenever you start to encrypt/decrypt a message. If you
-  don't see the window show up, try looking at the taskbar (bottom of the screen) for a picture of a red laser bouncing off
+- Sometimes, the animation window will be created in the background whenever you start to encrypt/decrypt a message. If you
+  don't see the window show up, look at the taskbar (bottom of the screen) for a picture of a red laser bouncing off
   a mirror. This is the window; simply click it to bring it to the front
-
-- If you really like the mirrors that you have set up, you can save them to a .txt file by choosing option 4: "Export mirror
-  field"
-    - Enter a file path (Ex: "../assets/mirrors-1.txt") when prompted to save the mirrors
-    - It is recommended to save all of your mirror field files to the "assets" folder, so that they are all in the same place
-    - Don't worry about creating the file first; the file will be created for you if it doesn't already exist
-    - Also, you can enter the name of a file that already exists to replace it
+- If you like the mirrors that you have set up, you can save them by choosing *option 4: export mirror field*
+  - The field will be saved as a `.txt` file in `assets/user/`
+  - Don't worry about creating the file first; the file will be created for you if it doesn't already exist
+  - You can enter the name of a file that already exists to replace it
 
 ---
 
