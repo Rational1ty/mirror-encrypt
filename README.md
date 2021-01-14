@@ -22,98 +22,53 @@ Encrypt or decode messages using a grid of mirrors and a laser
 
 ## Commands
 
-* All commands are case-insensitive
-* Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part), separated by either a `:` or a `=`
-  Ex: `key:value` or `key=value`
-
-Commands are added to the program's "launcher.bat" file, in the "commands" variable, seperated by a space
-1. To edit the program's start-up commands, right click on the "launcher.bat" file and click "edit"
-2. Go to the variable named "commands" and add the commands that you'd like to run
-3. Ex: `set commands="window:true delay:50 beam:blue"`
-4. Save your changes by pressing "ctrl + s", then close the file. It is now ready to run
-
-A few things to keep in mind when using commands:
+- All commands are case-insensitive
+- Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part), separated by either a `:` or a `=`
+  - Ex: `key:value` or `key=value`
+- When entering commands from the command line (using *option 6: enter commands*), there should be no space between the key, value, and `:`/`=`
+- Settings are saved in the `mirror.properties` file
+  - Each property should be on its own line
+  - Keys/values can be separated by either `:` or `=`; space *is* allowed in this file
 - If you enter a command that is invalid (the key, value, or both key and value are wrong) the program will display an error
   and then safely shut down
-- In the list of commands below, the value of each command is replaced with a placeholder that represents a value (tf for
-  true/false, ms for # of milliseconds, etc.)
 
-**List of commands**
-    Command     |                               Description                               |      Accepted values     |                        Notes
---------------- | ----------------------------------------------------------------------- | ------------------------ | --------------------------------------------------
-delay           | changes the amount of time between each frame of animation              | Any non-negative integer | Values are measured in milliseconds
-create_window   | determines whether or not the encryption/decryption process is animated | 0 or 1                   | 
-repeat_sequence | toggles repeat when entering a mirror field from the keyboard           | 0 or 1                   | Will repeat input sequence until field is full
-beam_color      | changes the color of the beam                                           | Named* or hex color      | Only certain color names are valid; see list below
-trace_color     | changes color 1 (the "input" color)                                     | Named* or hex color      | 
-success_color   | changes color 2 (the "output" color)                                    | Named* or hex color      |
+### List of commands
+|     Command     |                               Description                               |      Accepted values     |                        Notes                       |
+| --------------- | ----------------------------------------------------------------------- | ------------------------ | -------------------------------------------------- |
+| delay           | Changes the amount of time between each frame of animation              | Non-negative integers¹   | Values are measured in milliseconds                |
+| create_window   | Determines whether or not the encryption/decryption process is animated | 0 or 1                   |                                                    |
+| repeat_sequence | Toggles repeat when entering a mirror field from the keyboard           | 0 or 1                   | Will repeat input sequence until field is full     |
+| beam_color      | Changes the color of the beam                                           | Named² or hex color      | Only certain color names are valid; see list below |
+| trace_color     | Changes color 1 (the "input" color)                                     | Named² or hex color      |                                                    |
+| success_color   | Changes color 2 (the "output" color)                                    | Named² or hex color      |                                                    |
 
-
-
-- `beam:color`: changes the color of the beam
-    > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
-    > Ex: "beam:cyan", "beam:green"  
-    > Default value: red  
-    > This command is especially useful if you are colorblind and cannot see red/green very well, as both the beam and the two
-    main colors (color1/color2) are either red or green  
-    > It is not recommended to set either the beam or main colors to black or white, as this may make some aspects of the program
-    harder to see
-
-- `color1:color`: changes the color of color1 (the "input" color)
-    > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
-    > Ex: `color1:gray`, `color1:magenta`  
-    > Default value: red  
-
-- `color2:color`: changes the color of color2 (the "output" color)
-    > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
-    > Ex: `color2:orange`, `color1:yellow`  
-    > Default value: green  
-
-- `delay:ms`: changes the amount of time (in milliseconds) between each frame of animation (assuming window is true)
-    > Accepted values: any non>negative integer (ms >= 0)  
-    > Ex: `delay:25` would make the animation faster, while `delay:100` would make it slower  
-    > Default value: 50  
-    > It is not recommended to use values greater than 500 or values that are not an even factor of 1000  
-    > Ex: `delay:2000` (just extrememly slow), or `delay:37` (may cause animation timing issues)  
-
-- `repeat:tf`: toggles the program's repeat functionality when creating a mirror field from keyboard (see tips & tricks section)
-    > Accepted values: boolean (true, false)  
-    > Ex: `repeat:true` or `repeat:false`  
-    > Default value: true  
-
-- `window:tf`: determines whether or not the program creates a window to animate the encryption/decryption process
-    > Accepted values: boolean (true, false)  
-    > Ex: `window:true` would cause a window to be created; `window:false` would cause the program to run in text-only mode  
-    > Default value: true  
+### Specific command notes
+¹ The delay, *n*, must be in the range 0 ≤ *n* ≤ 2,147,483,647 \
+² Named colors are limited to the following values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow 
 
 ---
 
 ## Tips and Tricks
 
-**Creating/loading mirror field**
-
-*From the keyboard:*
-- When creating a new mirror field from the keyboard, you can enter numbers (1-9) to represent a group of spaces or the
-  letter "n" to represent a line break (same as hitting the "enter" key, or entering the amount of spaces to the next line)
-- Ex: `/\/7/\` would be interpreted as `/\/       /\`
-- Any non-single digit number will be interpreted as two seperate numbers
-- Ex: `/\/43/\` -> `/\/       /\`
-- If you enter mirrors from the keyboard, the program will automatically repeat the sequence that you entered until the
-    entire board is filled up, as long as "repeat" is true. You can use this to make some really interesting patterns
-    (hint: try entering a sequence that is exactly 13 characters long)
-
-*From a file:*
-- You can create your own mirror fields by using notepad or any other simple text editor - get creative!
-- If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a";
-  it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
-- Save it as a ".txt" file in the program's "assets" folder for easy access
-- When running the program, you can load saved mirror fields by entering "../assets/fileName.txt" when prompted
-- When exporting a set of mirrors using the "Export mirror field" option, save it as "../assets/fileName.txt" when asked
-
-*From random generation:*
-- When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
-  different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
-  better. Try to find the perfect amount of mirrors to create the most unpredictable encryption!
+### Creating/loading mirror field
+1. From the keyboard
+  - If `repeat_sequence` is enabled, whatever you enter will be repeated top to bottom, left to right until the sequence reaches the end of the grid.
+    You can use this to make some really interesting patterns (hint: try entering a sequence that is exactly 13 characters long).
+  - You can enter numbers (1-9) to represent a group of spaces
+    - Ex: `/\/7/\` translates to `/\/       /\`
+    
+2. From a file
+  - You can create your own mirror fields by using notepad or any other simple text editor - get creative!
+  - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a";
+    it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
+  - Save it as a ".txt" file in the program's "assets" folder for easy access
+  - When running the program, you can load saved mirror fields by entering "../assets/fileName.txt" when prompted
+  - When exporting a set of mirrors using the "Export mirror field" option, save it as "../assets/fileName.txt" when asked
+  
+3. Randomly generated
+  - When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
+    different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
+    better. Try to find the perfect amount of mirrors to create the most unpredictable encryption!
 
 **Main menu**
 - Although there are seperate options for encrypting and decrypting, the process is acutally the same for both. This means
@@ -135,22 +90,15 @@ success_color   | changes color 2 (the "output" color)                          
 ## How to install Java
 
 In order to run a Java program, you must first install Java on your computer. If Java is already installed on this device, 
-then you should be ready to go. Otherwise, follow the steps in section 2: "Installing Java". If you're not sure whether you 
-have Java installed or not, follow the brief steps in section 1: "Checking if Java is already installed"
+then you should be ready to go. Otherwise, you'll need to follow these steps in order to download and install Java. If you're
+not sure whether you have Java installed or not, follow the brief steps below.
 
-- Checking if Java is already installed:
-    1. Open Run by pressing "Windows key + r" or by searching for "run" in the Windows search bar
-    2. In Run, type "cmd" and press "enter" or click "ok" to open the Windows command line (cmd.exe)
-    3. In the command line, type "javac -version"
-    4. If Java is installed, you should get a result similar to this:
+### Checking if Java is already installed
+1. Open the windows search bar (bottom right on the desktop) and search for "java"
+2. If the first result is `java`, then Java is already installed. Otherwise, you will need to install Java before you can run any Java programs
 
-        > javac 13
-
-       If not, you will need to install Java before you can run any Java programs
-
-
-- Installing Java:
-    1. Go to the Oracle website at "[MISSING]"
-    2. Click "[MISSING]" to download the current version of the JDK (Java Development Kit, it's Java + extra Java stuff)
-    3. Go to your "downloads" folder, right click on the JDK folder, and click "extract all"
-    4. Double-click on the extracted folder
+### Installing Java
+1. Go to the [Java download page](https://java.com/en/download/)
+2. Click **"Agree and Start Free Download"** to download the current version of Java
+3. Go to your `Downloads` folder and double-click on the Java installer — it should be named something like `jre-8u271-windows-x64.exe`
+4. Follow the steps in the installer to complete the installation
