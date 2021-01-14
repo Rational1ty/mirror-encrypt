@@ -1,4 +1,4 @@
-# mirror-encrypt
+# Mirror encrypt
 
 Encrypt or decode messages using a grid of mirrors and a laser
 
@@ -132,7 +132,7 @@ success_color   | changes color 2 (the "output" color)                          
 
 ---
 
-~~How to install Java on your computer
+## How to install Java
 
 In order to run a Java program, you must first install Java on your computer. If Java is already installed on this device, 
 then you should be ready to go. Otherwise, follow the steps in section 2: "Installing Java". If you're not sure whether you 
@@ -154,44 +154,3 @@ have Java installed or not, follow the brief steps in section 1: "Checking if Ja
     2. Click "[MISSING]" to download the current version of the JDK (Java Development Kit, it's Java + extra Java stuff)
     3. Go to your "downloads" folder, right click on the JDK folder, and click "extract all"
     4. Double-click on the extracted folder
-
-
-Common issues and errors when running a Java program using command line:
-- "The system cannot find the drive specified"
-    - This usually means that either the drive that you entered does not exist on your device, or the drive that you entered
-        is not online.
-    - Ex: You entered "Z:" but your computer only has "C:" and "D:"
-    - Try checking the names of your drives (in "This PC") and then entering the correct drive name. If you enter a valid
-        drive letter and still receive this error, then your drive might not be online. Try checking the drive's status and
-        setting it up if needed (information on how to do this can be found online)
-
-- "The system cannot find the path specified"
-    - This usually means that you are trying to run the launcher outside of the program's root directory (the
-        "mirror-encryption" folder) or that the names of one or more of the program's directories has been changed
-    - Ex: You moved the "launcher.bat" file to a different folder
-    - Ex: You renamed "bin" to "trash can" or "lib" to "madlibs"
-    - Try making sure that all of the program's folders have their original names and have not been moved (they should be
-        named "src", "lib", "bin", and "assets")
-
-- "javac is not a recognized internal or batch command"
-    - This usually means that you either don't have Java installed, don't have the JDK installed, or haven't added Java to
-        your system's PATH yet.
-    - Try making sure that you have downloaded and installed the JDK. If you have, then make sure that you have correctly
-        added it to your system's PATH. If the problem persists, more information can be found online.
-
-- "'[command]' is not recognized as an internal or external command, operable program or batch file"
-    - This usually means that the command that you entered is either misspelled or doesn't exist.
-    - Try checking the spelling and structure of your command and correcting it if necessary.
-
-- "error: file not found: [fileName]"
-    - This error typically means that either you misspelled the name of the program or the program is in a different folder
-    - Ex: You entered "javac ProgramOne.java" when the program's name is actually "ProgramTwo.java"
-    - Try running the command again, but with the correct program name. If this does not fix the problem, then check that
-        the program you are trying to compile is in the folder you are currently operating the command line in
-
-- "Error: Could not find or load main class [ProgramName]"
-    - This error typically means that either you misspelled the name of the program you are trying to run, or you tried to
-        run the wrong file
-    - Ex: You just compiled "ProgramOne.java" but then entered the command "java ProgramTwo"
-    - Try re-entering the command, making sure that the spelling of the program's name is correct. If the error persists,
-        then make sure that you are trying to run the same program that you just compiled.~~
