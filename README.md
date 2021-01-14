@@ -16,15 +16,15 @@ Encrypt or decode messages using a grid of mirrors and a laser
 - Version: 2.2.0
 - Languages: Java (JDK 13)
 - Offline
-- LOC: 1460
+- LOC: 1503
 
 ---
 
 ## Commands
 
-All commands are case-insensitive\
-Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part)\
-Ex: `key:value`, `delay:100`
+* All commands are case-insensitive
+* Commands are made of 2 parts: the "key" (the 1st part) and the "value" (the 2nd part), separated by either a `:` or a `=`
+  Ex: `key:value` or `key=value`
 
 Commands are added to the program's "launcher.bat" file, in the "commands" variable, seperated by a space
 1. To edit the program's start-up commands, right click on the "launcher.bat" file and click "edit"
@@ -38,9 +38,18 @@ A few things to keep in mind when using commands:
 - In the list of commands below, the value of each command is replaced with a placeholder that represents a value (tf for
   true/false, ms for # of milliseconds, etc.)
 
-**List of commands:** beam:color, color1:color, color2:color, window:tf, delay:ms, repeat:tf
+**List of commands**
+    Command     |                               Description                               |      Accepted values     |                        Notes
+--------------- | ----------------------------------------------------------------------- | ------------------------ | --------------------------------------------------
+delay           | changes the amount of time between each frame of animation              | Any non-negative integer | Values are measured in milliseconds
+create_window   | determines whether or not the encryption/decryption process is animated | 0 or 1                   | 
+repeat_sequence | toggles repeat when entering a mirror field from the keyboard           | 0 or 1                   | Will repeat input sequence until field is full
+beam_color      | changes the color of the beam                                           | Named* or hex color      | Only certain color names are valid; see list below
+trace_color     | changes color 1 (the "input" color)                                     | Named* or hex color      | 
+success_color   | changes color 2 (the "output" color)                                    | Named* or hex color      |
 
-**Command details:**
+
+
 - `beam:color`: changes the color of the beam
     > Acceptable values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow  
     > Ex: "beam:cyan", "beam:green"  
