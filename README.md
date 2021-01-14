@@ -14,7 +14,7 @@ Encrypt or decode messages using a grid of mirrors and a laser
 ### Info
 - Author: Matthew Davidson (mdavidson390@outlook.com)
 - Version: 2.2.0
-- Languages: Java (JDK 13)
+- Languages: Java (99%), Batch (1%)
 - Offline
 - LOC: 1503
 
