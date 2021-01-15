@@ -28,7 +28,7 @@ Encrypt or decode messages using a grid of mirrors and a laser
 - When entering commands from the command line (using *option 6: enter commands*), there should be no space between the key, value, and `:`/`=`
 - Settings are saved in the `mirror.properties` file
   - Each property should be on its own line
-  - Keys/values can be separated by either `:` or `=`; space *is* allowed in this file
+  - Keys/values can be separated by either `:` or `=`; space *is allowed* in this file
 - If you enter a command that is invalid (the key, value, or both key and value are wrong) the program will display an error
   and then safely shut down
 
