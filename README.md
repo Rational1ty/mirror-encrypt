@@ -58,16 +58,16 @@ Encrypt or decode messages using a grid of mirrors and a laser
     - Ex: `/\/7/\` translates to `/\/       /\`
 2. From a file
     - You can create your own mirror fields by using notepad or any other simple text editor
-    - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a" —
+    - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing `ctrl + a` –
       it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
     - Save it as a `.txt` file in the `assets/user/` folder
     - When running the program, you can load saved mirror fields by entering the filename when prompted
 3. Randomly generated
     - When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
-      different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
+      different amounts! Higher mirror density usually results in more secure encryption, but more mirrors is not always
       better. Try to find the perfect amount of mirrors to create the most unpredictable code!
 
-**Main menu**
+### Main menu
 - Sometimes, the animation window will be created in the background whenever you start to encrypt/decrypt a message. If you
   don't see the window show up, look at the taskbar (bottom of the screen) for a picture of a red laser bouncing off
   a mirror. This is the window; simply click it to bring it to the front
@@ -85,7 +85,7 @@ then you should be ready to go. Otherwise, you'll need to follow these steps in 
 not sure whether you have Java installed or not, follow the brief steps below.
 
 ### Checking if Java is already installed
-1. Open the windows search bar (bottom right on the desktop) and search for "java"
+1. Open the windows search bar (bottom left on the desktop) and search for "java"
 2. If the first result is `java`, then Java is already installed. Otherwise, you will need to install Java before you can run any Java programs
 
 ### Installing Java
