@@ -1,7 +1,18 @@
-# CHANGELOG // mirror-encrypt
+# CHANGELOG // Mirror encrypt
 
-### Current version (dev): 2.3.3
-### Current version (stable): 2.2.3
+### Current version: v2.5.0
+
+---
+
+## v2.5.0 | 01-14-2021
+***The Enduring***
+- Added `mirror.properties` file to keep track of preferences
+- Overhauled the command system to work better for both developer and user
+- Launcher improvements
+- Updated README
+- Added MIT license
+- Fixed several issues
+- Finishing touches
 
 ---
 
@@ -11,7 +22,7 @@
     - Added a check for empty input
     - Removed the ability to enter `n` or `N` as a valid character
     - Two-digit numbers will now produce the correct amount of spaces. For example:
-        - `13 => 4 spaces` (old) vs `13 => 13 spaces` (new)
+      `13 => 4 spaces` (old) vs `13 => 13 spaces` (new)
 - Changed the behavior of option 1: *encrypt message*
     - If no message is entered, the entire alphabet will be passed through the field
     - This is equivalent to entering `abcdefghijklmnoparstuvwxyzABCDEFGHIJKLMNOPARSTUVWXYZ`
