@@ -52,20 +52,20 @@ Encrypt or decode messages using a grid of mirrors and a laser
 
 ### Creating/loading mirror field
 1. From the keyboard
-  - If `repeat_sequence` is enabled, whatever you enter will be repeated top to bottom, left to right until the sequence reaches the end of the grid.
-    You can use this to make some really interesting patterns (hint: try entering a sequence that is exactly 13 characters long).
-  - You can enter numbers (1-9) to represent a group of spaces
+    - If `repeat_sequence` is enabled, whatever you enter will be repeated top to bottom, left to right until the sequence reaches the end of the grid.
+      You can use this to make some really interesting patterns (hint: try entering a sequence that is exactly 13 characters long).
+    - You can enter numbers (1-9) to represent a group of spaces
     - Ex: `/\/7/\` translates to `/\/       /\`
 2. From a file
-  - You can create your own mirror fields by using notepad or any other simple text editor
-  - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a" —
-    it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
-  - Save it as a `.txt` file in the `assets/user/` folder
-  - When running the program, you can load saved mirror fields by entering the filename when prompted
+    - You can create your own mirror fields by using notepad or any other simple text editor
+    - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing "ctrl + a" —
+      it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
+    - Save it as a `.txt` file in the `assets/user/` folder
+    - When running the program, you can load saved mirror fields by entering the filename when prompted
 3. Randomly generated
-  - When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
-    different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
-    better. Try to find the perfect amount of mirrors to create the most unpredictable code!
+    - When generating a random mirror field by entering a % value, any number between 0 and 100 will work, so experiment with
+      different values! Higher mirror density usually results in more secure encryption, but more mirrors is not always
+      better. Try to find the perfect amount of mirrors to create the most unpredictable code!
 
 **Main menu**
 - Sometimes, the animation window will be created in the background whenever you start to encrypt/decrypt a message. If you
