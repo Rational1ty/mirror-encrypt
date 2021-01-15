@@ -42,7 +42,7 @@ Encrypt or decode messages using a grid of mirrors and a laser
 | trace_color     | Changes color 1 (the "input" color)                                     | Named² or hex color      |                                                    |
 | success_color   | Changes color 2 (the "output" color)                                    | Named² or hex color      |                                                    |
 
-### Specific command notes
+### Command notes
 ¹ The delay, *n*, must be in the range 0 ≤ *n* ≤ 2,147,483,647 \
 ² Named colors are limited to the following values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow 
 
