@@ -1,4 +1,4 @@
-# Mirror encrypt
+# README // Mirror encrypt
 
 Encrypt or decode messages using a grid of mirrors and a laser
 
