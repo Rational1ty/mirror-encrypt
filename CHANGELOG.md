@@ -18,12 +18,12 @@
 
 ## v2.2.0 | 07-03-2020
 ***The Robust***
-- Fixed several bugs with field creation option 3: *create mirror field from keyboard*
+- Fixed several bugs with *option 3: create mirror field from keyboard*
     - Added a check for empty input
     - Removed the ability to enter `n` or `N` as a valid character
     - Two-digit numbers will now produce the correct amount of spaces. For example:
       `13 => 4 spaces` (old) vs `13 => 13 spaces` (new)
-- Changed the behavior of option 1: *encrypt message*
+- Changed the behavior of *option 1: encrypt message*
     - If no message is entered, the entire alphabet will be passed through the field
     - This is equivalent to entering `abcdefghijklmnoparstuvwxyzABCDEFGHIJKLMNOPARSTUVWXYZ`
     - This is a quick and easy way to show the all of the different paths that the beam can take through the field
