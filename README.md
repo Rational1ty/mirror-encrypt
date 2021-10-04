@@ -3,7 +3,7 @@
 Encrypt or decode messages using a grid of mirrors and a laser
 
 ### Overview
-- This program provides an interesting way to encrypt/decrypt messages using mirrors and LASER BEAMS!
+- This program provides an interesting way to encrypt/decrypt messages using mirrors and laser beams!
 - It includes various ways to create your own unique sets of mirrors (mirror fields), load fields that you've already made,
   generate mirrors automatically, or save some of your favorite combinations
 - The program also animates the process in real time, unless it is run in text-only mode (see commands for more info)
@@ -85,11 +85,5 @@ then you should be ready to go. Otherwise, you'll need to follow these steps in 
 not sure whether you have Java installed or not, follow the brief steps below.
 
 ### Checking if Java is already installed
-1. Open the windows search bar (bottom left on the desktop) and search for "java"
-2. If the first result is `java`, then Java is already installed. Otherwise, you will need to install Java before you can run any Java programs
-
-### Installing Java
-1. Go to the [Java download page](https://java.com/en/download/)
-2. Click **"Agree and Start Free Download"** to download the current version of Java
-3. Go to your `Downloads` folder and double-click on the Java installer — it should be named something like `jre-8u271-windows-x64.exe`
-4. Follow the steps in the installer to complete the installation
+1. Open the windows search bar (bottom left on the desktop) and search for "java".
+2. If the first result is `java`, then Java is already installed. Otherwise, you will need to install Java before you can run any Java programs.
