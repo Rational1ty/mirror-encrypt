@@ -51,20 +51,15 @@ public class Box {
 		numParts = val == ' ' ? 0 : 1;
 		content = new ArrayList<Line2D.Float>(numParts);
 
-		switch (val) {
-			case '/':
-				content.add(normals.get(0));
-				break;
-			case '\\':
-				content.add(normals.get(1));
-				break;
-			case '|':
-				content.add(normals.get(2));
-				break;
-			case '-':
-				content.add(normals.get(3));
-				break;
-		}
+		content.add(normals.get(
+			switch (val) {
+				case '/' -> 0;
+				case '\\' -> 1;
+				case '|' -> 2;
+				case '-' -> 3;
+				default -> -1;
+			}
+		));
 		
 		highlight = null;
 		hlArea = null;
@@ -122,14 +117,15 @@ public class Box {
 	public void revert() {
 		content.clear();
 
-		if (value == '/')
-			content.add(normals.get(0));
-		if (value == '\\')
-			content.add(normals.get(1));
-		if (value == '|')
-			content.add(normals.get(2));
-		if (value == '-')
-			content.add(normals.get(3));
+		content.add(normals.get(
+			switch (value) {
+				case '/' -> 0;
+				case '\\' -> 1;
+				case '|' -> 2;
+				case '-' -> 3;
+				default -> -1;
+			}
+		));
 
 		numParts = 1;
 		highlight = null;
@@ -138,20 +134,13 @@ public class Box {
 
 	public void setHighlight(Color c, int area) {
 		highlight = c;
-		switch (area) {
-			case HALF_LEFT:
-				hlArea = new Rectangle2D.Float(x, y, HALF, SCL);
-				break;
-			case HALF_TOP:
-				hlArea = new Rectangle2D.Float(x, y, SCL, HALF);
-				break;
-			case HALF_RIGHT:
-				hlArea = new Rectangle2D.Float(x + HALF, y, SCL, SCL);
-				break;
-			case HALF_BOTTOM:
-				hlArea = new Rectangle2D.Float(x, y + HALF, SCL, SCL);
-				break;
-		}
+		hlArea = switch (area) {
+			case HALF_LEFT -> new Rectangle2D.Float(x, y, HALF, SCL);
+			case HALF_TOP -> new Rectangle2D.Float(x, y, SCL, HALF);
+			case HALF_RIGHT -> new Rectangle2D.Float(x + HALF, y, SCL, SCL);
+			case HALF_BOTTOM -> new Rectangle2D.Float(x, y + HALF, SCL, SCL);
+			default -> null;
+		};
 	}
 
 	public boolean isLineNormal(Line2D.Float line) {
