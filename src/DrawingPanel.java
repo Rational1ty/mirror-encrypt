@@ -201,7 +201,8 @@ public final class DrawingPanel extends JPanel {
 		// Top edge
 		for (int x = 2; x < grid[1].length - 2; x++) {
 			Box b = grid[1][x];
-			b.content.forEach(c -> {
+
+			for (var c : b.content) {
 				if (b.isLineHalfStep(c)) {
 					g2d.setColor(beamColor);
 					g2d.draw(c);
@@ -209,13 +210,14 @@ public final class DrawingPanel extends JPanel {
 				} else {
 					g2d.draw(c);
 				}
-			});
+			}
 		}
 
 		// Bottom edge
 		for (int x = 2; x < grid[grid.length - 2].length - 2; x++) {
 			Box b = grid[grid[grid.length - 2].length - 2][x];
-			b.content.forEach(c -> {
+
+			for (var c : b.content) {
 				if (b.isLineHalfStep(c)) {
 					g2d.setColor(beamColor);
 					g2d.draw(c);
@@ -223,7 +225,7 @@ public final class DrawingPanel extends JPanel {
 				} else {
 					g2d.draw(c);
 				}
-			});
+			}
 		}
 
 		// Bottom characters
@@ -254,7 +256,8 @@ public final class DrawingPanel extends JPanel {
 		// Left edge
 		for (int y = 2; y < grid.length - 2; y++) {
 			Box b = grid[y][1];
-			b.content.forEach(c -> {
+
+			for (var c : b.content) {
 				if (b.isLineHalfStep(c)) {
 					g2d.setColor(beamColor);
 					g2d.draw(c);
@@ -262,13 +265,14 @@ public final class DrawingPanel extends JPanel {
 				} else {
 					g2d.draw(c);
 				}
-			});
+			}
 		}
 
 		// Right edge
 		for (int y = 2; y < grid.length - 2; y++) {
 			Box b = grid[y][grid.length - 2];
-			b.content.forEach(c -> {
+			
+			for (var c : b.content) {
 				if (b.isLineHalfStep(c)) {
 					g2d.setColor(beamColor);
 					g2d.draw(c);
@@ -276,7 +280,7 @@ public final class DrawingPanel extends JPanel {
 				} else {
 					g2d.draw(c);
 				}
-			});
+			}
 		}
 
 		// Right characters

@@ -2,39 +2,38 @@ package src;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.lang.Class;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
+import java.util.function.UnaryOperator;
+import java.util.stream.IntStream;
 
 public final class MirrorConstants {
 	private static final Properties constants = new Properties();
 	private static final Path path = Paths.get("../mirror.properties");
 
-	private static final String[] keys = {
+	private static final List<String> keys = List.of(
 		"delay", "create_window", "repeat_sequence",
 		"beam_color", "trace_color", "success_color"
-	};
-	private static final String[] defaults = {
+	);
+	private static final List<String> defaults = List.of(
 		"50", "1", "1",
 		"red", "red", "green"
-	};
+	);
 
 	static {
 		try {
 			if (!Files.exists(path)) {
 				// Pair each key with its default value, formatted and separated by a colon
-				String[] lines = new String[keys.length];
-				
-				for (int i = 0; i < lines.length; i++) {
-					lines[i] = String.format("%-16s %s", keys[i] + ":", defaults[i]);
-				}
+				List<String> lines = IntStream.range(0, keys.size())
+					.mapToObj(i -> String.format("%-16s %s", keys.get(i) + ":", defaults.get(i)))
+					.toList();
 
 				// Create mirror.properties in root directory and write default k:v pairs
 				Files.createFile(path);
-				Files.write(path, Arrays.asList(lines));
+				Files.write(path, lines);
 			}
 			constants.load(Files.newInputStream(path));
 		} catch (IOException ex) {
@@ -98,16 +97,13 @@ public final class MirrorConstants {
 	}
 
 	private static void storeProperties() throws IOException {
-		String[] lines = new String[keys.length];
+		UnaryOperator<String> formatKey = (String key) -> 
+			String.format("%-16s %s", key + ":", constants.getProperty(key));
 
-		for (int i = 0; i < lines.length; i++) {
-			lines[i] = String.format(
-				"%-16s %s",
-				keys[i] + ":",
-				constants.getProperty(keys[i])
-			);
-		}
+		var lines = keys.stream()
+			.map(k -> k.transform(formatKey))
+			.toList();
 
-		Files.write(path, Arrays.asList(lines));
+		Files.write(path, lines);
 	}
 }

@@ -57,7 +57,7 @@ public class Box {
 				case '\\' -> 1;
 				case '|' -> 2;
 				case '-' -> 3;
-				default -> -1;
+				default -> 4;
 			}
 		));
 		
@@ -70,7 +70,8 @@ public class Box {
 			new Line2D.Float(x, y + SCL, x + SCL, y),			// "/"
 			new Line2D.Float(x, y, x + SCL, y + SCL),			// "\"
 			new Line2D.Float(x + HALF, y, x + HALF, y + SCL),	// "|"
-			new Line2D.Float(x, y + HALF, x + SCL, y + HALF)	// "-"
+			new Line2D.Float(x, y + HALF, x + SCL, y + HALF),	// "-"
+			new Line2D.Float(x, y, x, y)
 		);
 	}
 
@@ -123,7 +124,7 @@ public class Box {
 				case '\\' -> 1;
 				case '|' -> 2;
 				case '-' -> 3;
-				default -> -1;
+				default -> 4;
 			}
 		));
 

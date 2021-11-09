@@ -30,7 +30,10 @@ public final class Master extends JFrame implements ActionListener {
 		setBackground(Color.decode("#ededed"));
 
 		setTitle(op.toUpperCase().charAt(0) + op.substring(1, op.length()) + " message");
-		setIconImage(new ImageIcon(System.getProperty("java.class.path") + "/../assets/internal/laser-reflect.jpg").getImage());
+		setIconImage(
+			new ImageIcon(System.getProperty("java.class.path") + "/../assets/internal/laser-reflect.jpg")
+			.getImage()
+		);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		WIDTH = setSize(message);
