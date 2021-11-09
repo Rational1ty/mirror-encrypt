@@ -23,6 +23,7 @@ public final class Master extends JFrame implements ActionListener {
 
     private AnimationPanel apanel;
     private Timer timer;
+    private int delay;
 
 	public Master(String message, Beam beam, String op, int delay) {
 		getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
@@ -49,6 +50,8 @@ public final class Master extends JFrame implements ActionListener {
 
         timer = new Timer(delay, this);
         timer.start();
+
+        this.delay = delay;
     }
 
     // Determines the width of the window
@@ -62,7 +65,7 @@ public final class Master extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (!apanel.tracing) {
-            try { Thread.sleep(200); }
+            try { Thread.sleep(delay * 4); }
             catch (InterruptedException ex) {}
         }
 
