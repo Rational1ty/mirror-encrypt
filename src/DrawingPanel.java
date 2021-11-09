@@ -60,6 +60,7 @@ public final class DrawingPanel extends JPanel {
             grid[i][grid[i].length - 2] = new Box(getX() + ((grid[i].length - 2) * Box.SCL), getY() + (i * Box.SCL), '|');
             grid[i][grid[i].length - 1] = new Box(getX() + ((grid[i].length - 1) * Box.SCL), getY() + (i * Box.SCL), (char) (i + 108));
         }
+        
         // Iterates over the top/bottom edges of the border and sets them accordingly
         for (int i = 2; i < grid[0].length - 2; i++) {
             grid[0][i] = new Box(getX() + (i * Box.SCL), getY(), (char) (i + 95));
@@ -163,10 +164,10 @@ public final class DrawingPanel extends JPanel {
         drawBorderLR(g2d);
 
         // Drawing corners
-        grid[1][1].content.forEach(c -> { g2d.draw(c); });
-        grid[1][grid[1].length - 2].content.forEach(c -> { g2d.draw(c); });
-        grid[grid.length - 2][1].content.forEach(c -> { g2d.draw(c); });
-        grid[grid.length - 2][grid[grid.length - 2].length - 2].content.forEach(c -> { g2d.draw(c); });
+        grid[1][1].content.forEach(g2d::draw);
+        grid[1][grid[1].length - 2].content.forEach(g2d::draw);
+        grid[grid.length - 2][1].content.forEach(g2d::draw);
+        grid[grid.length - 2][grid[grid.length - 2].length - 2].content.forEach(g2d::draw);
 
         // Drawing beam and mirrors
         drawBeam(g2d);
@@ -178,10 +179,10 @@ public final class DrawingPanel extends JPanel {
     // ---------------------------------------------------------------------------------------------------------------------------------------------- DRAWING METHODS
 
     private void drawHighlightedBoxes(Graphics2D g2d) {
-        for (int y = 0; y < grid.length; y++) {
-            for (int x = 0; x < grid[y].length; x++) {
-                Box b = grid[y][x];
+        for (var row : grid) {
+            for (var b : row) {
                 if (b.highlight == null) continue;
+
                 g2d.setColor(b.highlight);
                 g2d.fill(b.hlArea);
             }
@@ -194,8 +195,9 @@ public final class DrawingPanel extends JPanel {
         for (int x = 2; x < grid[0].length - 2; x++) {
             Box b = grid[0][x];
             g2d.drawString(b.value + "", b.x + Math.round(Box.SCL / 4), b.y + Math.round(Box.SCL * 1.2));
-            b.content.forEach(c -> { g2d.draw(c); });
+            b.content.forEach(g2d::draw);
         }
+
         // Top edge
         for (int x = 2; x < grid[1].length - 2; x++) {
             Box b = grid[1][x];
@@ -209,6 +211,7 @@ public final class DrawingPanel extends JPanel {
                 }
             });
         }
+
         // Bottom edge
         for (int x = 2; x < grid[grid.length - 2].length - 2; x++) {
             Box b = grid[grid[grid.length - 2].length - 2][x];
@@ -222,11 +225,16 @@ public final class DrawingPanel extends JPanel {
                 }
             });
         }
+
         // Bottom characters
         for (int x = 2; x < grid[grid.length - 1].length - 2; x++) {
             Box b = grid[grid.length - 1][x];
-            g2d.drawString(b.value + "", b.x + Math.round(Box.SCL / 4), b.y - Math.round(Box.SCL / 1.35) + Box.SCL);
-            b.content.forEach(c -> { g2d.draw(c); });
+            g2d.drawString(
+                b.value + "",
+                b.x + Math.round(Box.SCL / 4),
+                b.y - Math.round(Box.SCL / 1.35) + Box.SCL
+            );
+            b.content.forEach(g2d::draw);
         }
     }
 
@@ -235,9 +243,14 @@ public final class DrawingPanel extends JPanel {
         // Left characters
         for (int y = 2; y < grid.length - 2; y++) {
             Box b = grid[y][0];
-            g2d.drawString(b.value + "", b.x + Math.round(Box.SCL / 1.35), b.y + Math.round(Box.SCL / 1.35));
-            b.content.forEach(c -> { g2d.draw(c); });
+            g2d.drawString(
+                b.value + "",
+                b.x + Math.round(Box.SCL / 1.35),
+                b.y + Math.round(Box.SCL / 1.35)
+            );
+            b.content.forEach(g2d::draw);
         }
+
         // Left edge
         for (int y = 2; y < grid.length - 2; y++) {
             Box b = grid[y][1];
@@ -251,6 +264,7 @@ public final class DrawingPanel extends JPanel {
                 }
             });
         }
+
         // Right edge
         for (int y = 2; y < grid.length - 2; y++) {
             Box b = grid[y][grid.length - 2];
@@ -264,11 +278,16 @@ public final class DrawingPanel extends JPanel {
                 }
             });
         }
+
         // Right characters
         for (int y = 2; y < grid.length - 2; y++) {
             Box b = grid[y][grid[y].length - 1];
-            g2d.drawString(b.value + "", b.x - Math.round(Box.SCL / 4), b.y + Math.round(Box.SCL / 1.4));
-            b.content.forEach(c -> { g2d.draw(c); });
+            g2d.drawString(
+                b.value + "",
+                b.x - Math.round(Box.SCL / 4),
+                b.y + Math.round(Box.SCL / 1.4)
+            );
+            b.content.forEach(g2d::draw);
         }
     }
 
@@ -277,7 +296,9 @@ public final class DrawingPanel extends JPanel {
         for (int y = 2; y < grid.length - 2; y++) {
             for (int x = 2; x < grid[y].length - 2; x++) {
                 Box b = grid[y][x];
+
                 if (b.numParts <= 1 && b.value != ' ') continue;
+
                 for (int i = b.value == ' ' ? 0 : 1; i < b.content.size(); i++) {
                     g2d.draw(b.content.get(i));
                 }
@@ -287,11 +308,13 @@ public final class DrawingPanel extends JPanel {
 
     private void drawMirrors(Graphics2D g2d) {
         g2d.setColor(Color.BLACK);
+
         for (int y = 2; y < grid.length - 2; y++) {
             for (int x = 2; x < grid[y].length - 2; x++) {
                 Box b = grid[y][x];
-                if (b.numParts == 0) continue;
-                if (b.value == ' ') continue;
+
+                if (b.numParts == 0 || b.value == ' ') continue;
+
                 g2d.draw(b.content.get(0));
             }
         }
@@ -299,12 +322,13 @@ public final class DrawingPanel extends JPanel {
 
     // Removes the content that makes up the beam from the respective boxes
     public void clearBeam() {
-        for (int y = 0; y < grid.length; y++) {
-            for (int x = 0; x < grid[y].length; x++) {
-                if (grid[y][x] == null) continue;
-                grid[y][x].revert();
+        for (var row : grid) {
+            for (var b : row) {
+                if (b == null) continue;
+                b.revert();
             }
         }
+
         addCorners();
         addEdgeStyleLines();
         addCharStyleLines();

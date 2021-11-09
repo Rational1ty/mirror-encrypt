@@ -31,6 +31,7 @@ public class Box {
 
     // Collection of lines for /, \, |, and -
     private Line2D.Float[] normals = new Line2D.Float[4];
+
     // Collection of lines that correspond to the half-step and lined style Box constants
     private Line2D.Float[] specials = new Line2D.Float[12];
 
@@ -48,6 +49,7 @@ public class Box {
         
         numParts = val == ' ' ? 0 : 1;
         content = new ArrayList<Line2D.Float>(numParts);
+
         switch (val) {
             case '/':
                 content.add(normals[0]);
@@ -62,6 +64,7 @@ public class Box {
                 content.add(normals[3]);
                 break;
         }
+        
         highlight = null;
         hlArea = null;
     }

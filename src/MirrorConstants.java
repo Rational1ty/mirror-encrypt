@@ -12,14 +12,22 @@ import java.util.Properties;
 public final class MirrorConstants {
     private static final Properties constants = new Properties();
     private static final Path path = Paths.get("../mirror.properties");
-    private static final String[] keys = {"delay", "create_window", "repeat_sequence", "beam_color", "trace_color", "success_color"};
-    private static final String[] defaults = {"50", "1", "1", "red", "red", "green"};
+
+    private static final String[] keys = {
+        "delay", "create_window", "repeat_sequence",
+        "beam_color", "trace_color", "success_color"
+    };
+    private static final String[] defaults = {
+        "50", "1", "1",
+        "red", "red", "green"
+    };
 
     static {
         try {
             if (!Files.exists(path)) {
                 // Pair each key with its default value, formatted and separated by a colon
                 String[] lines = new String[keys.length];
+                
                 for (int i = 0; i < lines.length; i++) {
                     lines[i] = String.format("%-16s %s", keys[i] + ":", defaults[i]);
                 }
@@ -39,7 +47,8 @@ public final class MirrorConstants {
             try {
                 storeProperties();
             } catch (IOException ex) {
-                System.err.println("Error while accessing file \"mirror.properties\". Some properties may not have been saved.");
+                System.err.println(
+                    "Error while accessing file \"mirror.properties\". Some properties may not have been saved.");
             }
         }));
     }
@@ -90,6 +99,7 @@ public final class MirrorConstants {
 
     private static void storeProperties() throws IOException {
         String[] lines = new String[keys.length];
+
         for (int i = 0; i < lines.length; i++) {
             lines[i] = String.format(
                 "%-16s %s",
@@ -97,6 +107,7 @@ public final class MirrorConstants {
                 constants.getProperty(keys[i])
             );
         }
+
         Files.write(path, Arrays.asList(lines));
     }
 }
