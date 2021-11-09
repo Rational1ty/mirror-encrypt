@@ -32,12 +32,7 @@ public final class AnimationPanel extends JPanel {
 
         // Initializing JLabels, setting their position in layout, and adding thiem to this panel
         mlabel = new HLabel(message, "Input: ", SwingConstants.CENTER);
-        if (op.equals("encrypt"))
-            rlabel = new HLabel("", "Encrypted message: ", SwingConstants.CENTER);
-        else if (op.equals("decrypt"))
-            rlabel = new HLabel("", "Decrypted message: ", SwingConstants.CENTER);
-        else
-            rlabel = new HLabel("", "Result message: ", SwingConstants.CENTER);
+        rlabel = new HLabel("", "Output: ", SwingConstants.CENTER);
 
         mlabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         rlabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

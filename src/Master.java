@@ -57,7 +57,7 @@ public final class Master extends JFrame implements ActionListener {
     // Determines the width of the window
     private int setSize(String message) {
         FontMetrics fm = getFontMetrics(HLabel.FONT);
-        int width = fm.stringWidth(message + "Encrypted message: ") + 50;
+        int width = fm.stringWidth(message + "Output: ") + 50;
         if (width < 700) width = 700;
         setPreferredSize(new Dimension(width, 700));
         return width;
@@ -65,8 +65,9 @@ public final class Master extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (!apanel.tracing) {
-            try { Thread.sleep(delay * 4); }
-            catch (InterruptedException ex) {}
+            try {
+                Thread.sleep(delay * 4);
+            } catch (InterruptedException ex) {}
         }
 
         apanel.update();
@@ -74,8 +75,9 @@ public final class Master extends JFrame implements ActionListener {
         if (apanel.done) {
             timer.stop();
 
-            try { Thread.sleep(1000); }
-            catch (InterruptedException ex) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {}
 
             done = true;
 
