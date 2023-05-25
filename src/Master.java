@@ -32,14 +32,16 @@ public final class Master extends JFrame implements ActionListener {
 		setTitle(op.toUpperCase().charAt(0) + op.substring(1, op.length()) + " message");
 		setIconImage(
 			new ImageIcon(System.getProperty("java.class.path") + "/../assets/internal/laser-reflect.jpg")
-			.getImage()
+				.getImage()
 		);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		WIDTH = setSize(message);
 		done = false;
 		
 		getContentPane().setLayout(new BorderLayout());
+
 		apanel = new AnimationPanel(message, beam, op);
 		add(apanel, SwingConstants.CENTER);
 		pack();
@@ -62,8 +64,9 @@ public final class Master extends JFrame implements ActionListener {
 		FontMetrics fm = getFontMetrics(HLabel.FONT);
 		int width = fm.stringWidth(message + "Output: ") + 50;
 		
-		if (width < 700)
+		if (width < 700) {
 			width = 700;
+		}
 
 		setPreferredSize(new Dimension(width, 700));
 
@@ -72,9 +75,7 @@ public final class Master extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (!apanel.tracing) {
-			try {
-				Thread.sleep(delay * 4);
-			} catch (InterruptedException ex) {}
+			sleep(delay * 4);
 		}
 
 		apanel.update();
@@ -82,13 +83,19 @@ public final class Master extends JFrame implements ActionListener {
 		if (apanel.done) {
 			timer.stop();
 
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException ex) {}
+			sleep(1000);
 
 			done = true;
 
 			dispose();
+		}
+	}
+
+	static void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException ex) {
+			// do nothing
 		}
 	}
 }

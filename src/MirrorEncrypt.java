@@ -1,6 +1,7 @@
 package src;
 
 import static java.lang.System.out;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,123 +10,116 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MirrorEncrypt {
-	public static void main(String[] args) throws IOException {
-		Scanner kb = new Scanner(System.in);
+	static Scanner kb = new Scanner(System.in);
 
+	public static void main(String[] args) throws IOException {
 		// Setting up beam/mirrors menu
-		Beam beam = createBeam(kb);
+		Beam beam = createBeam();
 		
 		// Main menu, handles encryption, decoding, and displaying the mirror field
 		// After printing the menu, this section will repeat until 0 is entered
-		byte choice = -1;
 		String message;
 
 		displayMainMenu();
 
 		// Main menu loop
-		while (choice != 0) {
-			do {
-				out.print("\nEnter choice: ");
-				try {
-					choice = kb.nextByte();
-					kb.nextLine();
-				} catch (InputMismatchException ex) {
-					out.println("Input does not match expected type");
-					kb.nextLine();
-					continue;
-				}
+		while (true) {
+			int choice = getChoice(0, 6);
+			boolean createWindow = (int) MirrorConstants.get("create_window") != 0;
 
-				boolean createWindow = (int) MirrorConstants.get("create_window") != 0;
+			switch (choice) {
+				case 0:
+					kb.close();
+					return;
 
-				switch (choice) {
-					case 0: 
-						break;
-					case 1:	 // Encrypt message
-						out.print("Enter message to encrypt: ");
-						message = kb.nextLine();
+				case 1:	 // Encrypt message
+					out.print("Enter message to encrypt: ");
+					message = kb.nextLine();
 
-						if (message.isEmpty()) {
-							message = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-						}
+					if (message.isEmpty()) {
+						message = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+					}
 
-						out.print("Encrypted message: ");
-						out.println(encrypt(message, beam));
+					out.print("Encrypted message: ");
+					out.println(encrypt(message, beam));
 
-						try { Thread.sleep(250); }
-						catch (InterruptedException ex) {}
+					sleep(250);
 
-						if (createWindow)
-							show(message, beam, "encrypt");
-						break;
-					case 2:	 // Decrypt message
-						out.print("Enter message to decrypt: ");
-						message = kb.nextLine();
+					if (createWindow) {
+						show(message, beam, "encrypt");
+					}
 
-						out.print("Decrypted message: ");
-						out.println(encrypt(message, beam));
+					break;
 
-						try { Thread.sleep(250); }
-						catch (InterruptedException ex) {}
+				case 2:	 // Decrypt message
+					out.print("Enter message to decrypt: ");
+					message = kb.nextLine();
 
-						if (createWindow)
-							show(message, beam, "decrypt");
-						break;
-					case 3:	 // Display mirror field
-						out.println("\n  abcdefghijklm  ");
-						out.println("  -------------  ");
+					out.print("Decrypted message: ");
+					out.println(encrypt(message, beam));
 
-						for (int y = 0; y < beam.field.length; y++) {
-							out.print((char)(y + 65) + "|");
+					sleep(250);
 
-							for (int x = 0; x < beam.field[y].length; x++)
-								out.print(beam.field[y][x]);
+					if (createWindow) {
+						show(message, beam, "decrypt");
+					}
 
-							out.print("|" + (char)(y + 110) + "\n");
-						}
+					break;
 
-						out.println("  -------------  ");
-						out.println("  NOPQRSTUVWXYZ  ");
-						break;
-					case 4:	 // Export mirror field
-						out.print("Enter file name (will be saved in assets/user/): ");
-						String fileName = kb.nextLine();
+				case 3:	 // Display mirror field
+					out.println("\n  abcdefghijklm  ");
+					out.println("  -------------  ");
 
-						if (!fileName.matches(".+\\.txt")) {
-							fileName += ".txt";
-						}
+					for (int y = 0; y < beam.field.length; y++) {
+						out.print((char)(y + 65) + "|");
 
-						FileWriter fw = new FileWriter("../assets/user/" + fileName);
+						for (int x = 0; x < beam.field[y].length; x++)
+							out.print(beam.field[y][x]);
 
-						for (int y = 0; y < beam.field.length; y++) {
-							for (int x = 0; x < beam.field[y].length; x++)
-								fw.write(beam.field[y][x]);
-							fw.write("\n");
-						}
+						out.print("|" + (char)(y + 110) + "\n");
+					}
 
-						fw.close();
-						break;
-					case 5:	 // Change mirror field
-						beam = createBeam(kb);
-						displayMainMenu();
-						break;
-					case 6:
-						out.print("Enter command(s): ");
-						String[] commands = kb.nextLine().split("\\s+");
+					out.println("  -------------  ");
+					out.println("  NOPQRSTUVWXYZ  ");
+					break;
 
-						for (String cmd : commands) {
-							var kv = cmd.split("[:=]");
-							MirrorConstants.set(kv[0], kv[1]);
-						}
+				case 4:	 // Export mirror field
+					out.print("Enter file name (will be saved in assets/user/): ");
+					String fileName = kb.nextLine();
 
-						out.println("Command" + (commands.length > 1 ? "s" : "") + " executed");
-						break;
-					default:
-						out.println(choice + " is not a valid choice");
-				}
-			} while (choice > 0 && choice <= 5);
+					if (!fileName.matches(".+\\.txt")) {
+						fileName += ".txt";
+					}
+
+					FileWriter fw = new FileWriter("../assets/user/" + fileName);
+
+					for (int y = 0; y < beam.field.length; y++) {
+						for (int x = 0; x < beam.field[y].length; x++)
+							fw.write(beam.field[y][x]);
+						fw.write("\n");
+					}
+
+					fw.close();
+					break;
+
+				case 5:	 // Change mirror field
+					beam = createBeam();
+					displayMainMenu();
+					break;
+
+				case 6:  // Enter command(s)
+					out.print("Enter command(s): ");
+					String[] commands = kb.nextLine().split("\\s+");
+
+					for (String cmd : commands) {
+						var kv = cmd.split("[:=]");
+						MirrorConstants.set(kv[0], kv[1]);
+					}
+
+					out.println("Command" + (commands.length > 1 ? "s" : "") + " executed");
+					break;
+			}
 		}
-
-		kb.close();
 	}
 
 	// Prints out the main menu
@@ -139,16 +133,38 @@ public class MirrorEncrypt {
 		out.println("0) Exit program");
 	}
 
+	static int getChoice(int min, int max) {
+		while (true) {
+			out.print("\nEnter choice: ");
+
+			try {
+				int choice = kb.nextInt();
+				kb.nextLine();
+				if (choice >= min && choice <= max) return choice;
+				out.println(choice + " is not a valid choice");
+			} catch (InputMismatchException ex) {
+				out.println("Input does not match expected type");
+			}
+		}
+	}
+
+	static void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException ex) {
+			// do nothing
+		}
+	}
+
 	// Passes [text] through the [beam]'s mirror field and returns the resulting String
 	static String encrypt(String text, Beam beam) {
 		String r = "";
-		for (int i = 0; i < text.length(); i++) {
-			if (!(text.charAt(i) + "").matches("[A-Z|a-z]")) {
-				r += text.charAt(i);
-			} else {
-				r += beam.tracePath(text.charAt(i));
-			}
+
+		for (char c : text.toCharArray()) {
+			boolean encryptable = (c + "").matches("[A-Z|a-z]");
+			r += encryptable ? beam.tracePath(c) : c;
 		}
+
 		return r;
 	}
 
@@ -161,77 +177,58 @@ public class MirrorEncrypt {
 	}
 
 	// Creates a new mirror field and returns a Beam initialized with that field
-	static Beam createBeam(Scanner kb) throws IOException {
+	static Beam createBeam() throws IOException {
 		out.println("\n1) Enter mirror field from keyboard");
 		out.println("2) Create mirror field from file");
 		out.println("3) Generate random mirror field");
 
-		byte choice = -1;
+		int choice = getChoice(1, 3);
 
-		do {
-			out.print("\nEnter choice: ");
-			try {
-				choice = kb.nextByte();
-				kb.nextLine();
-			} catch (InputMismatchException ex) {
-				out.println("Input does not match expected type");
-				kb.nextLine();
-				continue;
+		switch (choice) {
+			case 1: {
+				out.print("Enter mirrors: ");
+				String mirrors = kb.nextLine();
+
+				try {
+					return new Beam(toMirrorField(mirrors));
+				} catch (IllegalArgumentException ex) {
+					out.println(ex.getMessage());
+					System.exit(-1);
+				}
+
+				break;
 			}
-
-			switch (choice) {
-				case 1: {
-					out.print("Enter mirrors: ");
-					String mirrors = kb.nextLine();
+			case 2:
+				while (true) {
+					out.print("Enter file name (will search in /assets/user): ");
+					String path = "../assets/user/" + kb.nextLine();
 
 					try {
-						return new Beam(toMirrorField(mirrors));
-					} catch (IllegalArgumentException ex) {
-						out.println(ex.getMessage());
-						System.exit(-1);
+						return new Beam(new File(path));
+					} catch (FileNotFoundException ex) {
+						out.println("File not found: " + ex.getMessage());
 					}
-
-					break;
 				}
-				case 2:
-					boolean cont = true;
-					while (cont) {
-						out.print("Enter file name (will search in /assets/user): ");
-						String path = "../assets/user/" + kb.nextLine();
+				// no need for break here since it would be unreachable and the compiler complains about it
+			case 3:
+				out.print("Enter % of field spaces that are mirrors: ");
+				double pct = kb.nextDouble();
 
-						if (!path.matches(".+\\.txt")) {
-							path += ".txt";
-						}
+				if (pct > 100) pct = 100;
+				if (pct < 0) pct = 0;
+				pct /= 2;
 
-						try {
-							return new Beam(new File(path));
-						} catch (FileNotFoundException ex) {
-							out.println("File not found: " + ex.getMessage());
-						}
+				char[][] mirrors = new char[13][13];
+
+				for (int y = 0; y < mirrors.length; y++) {
+					for (int x = 0; x < mirrors[y].length; x++) {
+						double r = Math.random() * 100;
+						mirrors[y][x] = r < pct ? '\\' : r > 100 - pct ? '/' : ' ';
 					}
-					break;
-				case 3:
-					out.print("Enter % of field spaces that are mirrors: ");
-					double pct = kb.nextDouble();
+				}
 
-					if (pct > 100) pct = 100;
-					if (pct < 0) pct = 0;
-					pct /= 2;
-
-					char[][] mirrors = new char[13][13];
-
-					for (int y = 0; y < mirrors.length; y++) {
-						for (int x = 0; x < mirrors[y].length; x++) {
-							double r = Math.random() * 100;
-							mirrors[y][x] = r < pct ? '\\' : r > 100 - pct ? '/' : ' ';
-						}
-					}
-
-					return new Beam(mirrors);
-				default:
-					out.println(choice + " is not a valid choice");
-			}
-		} while (choice < 1 || choice > 3);
+				return new Beam(mirrors);
+		}
 
 		return new Beam();
 	}

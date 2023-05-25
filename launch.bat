@@ -20,6 +20,7 @@ cd ../bin
 java src.MirrorEncrypt
 if errorlevel 1 goto:fatal2
 
+cd ..
 cmd /k
 goto:eof
 
