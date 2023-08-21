@@ -5,23 +5,17 @@ echo Launching mirror-encrypt...
 :: Make sure to launch from the correct location
 cd %~dp0
 
-:: Create bin if it doesn't exist
+:: Create /bin if it doesn't exist
 if not exist ./bin mkdir bin
 
 :: Compile the program (lib files first, then src files)
-cd lib && ^
-javac -d ../bin -cp ../bin *.java && ^
-cd ../src && ^
-javac -d ../bin -cp ../bin *.java
+javac -d bin lib/*.java src/*.java
 if errorlevel 1 goto:fatal1
 
 :: Run the program
-cd ../bin
-java src.MirrorEncrypt
+java -cp bin src.MirrorEncrypt
 if errorlevel 1 goto:fatal2
 
-cd ..
-cmd /k
 goto:eof
 
 :fatal1

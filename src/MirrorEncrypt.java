@@ -12,7 +12,10 @@ import java.util.Scanner;
 public class MirrorEncrypt {
 	static Scanner kb = new Scanner(System.in);
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
+		// Load constants
+		Class.forName("src.MirrorConstants");
+		
 		// Setting up beam/mirrors menu
 		Beam beam = createBeam();
 		

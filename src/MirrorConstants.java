@@ -1,5 +1,7 @@
 package src;
 
+import static java.lang.System.err;
+
 import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +14,7 @@ import java.util.stream.IntStream;
 
 public final class MirrorConstants {
 	private static final Properties constants = new Properties();
-	private static final Path path = Paths.get("../mirror.properties");
+	private static final Path path = Paths.get(".properties");
 
 	private static final List<String> keys = List.of(
 		"delay", "create_window", "repeat_sequence",
@@ -35,9 +37,17 @@ public final class MirrorConstants {
 				Files.createFile(path);
 				Files.write(path, lines);
 			}
+
 			constants.load(Files.newInputStream(path));
+
+			if (!keys.containsAll(constants.stringPropertyNames())) {
+				err.printf(
+					"Error: some properties are missing or invalid; check \"%s\" file\n",
+					path.getFileName());
+				System.exit(0);
+			}
 		} catch (IOException ex) {
-			System.err.println("Error while accessing file \"mirror.properties\".");
+			err.printf("Error while accessing file \"%s\"\n", path.getFileName());
 			System.exit(0);
 		}
 
@@ -46,8 +56,9 @@ public final class MirrorConstants {
 			try {
 				storeProperties();
 			} catch (IOException ex) {
-				System.err.println(
-					"Error while accessing file \"mirror.properties\". Some properties may not have been saved.");
+				err.printf(
+					"Error while accessing file \"%s\"; some settings may not have been saved\n",
+					path.getFileName());
 			}
 		}));
 	}
@@ -56,7 +67,7 @@ public final class MirrorConstants {
 
 	public static Object get(String key) {
 		Object res;
-		
+
 		if (constants.stringPropertyNames().contains(key)) {
 			String value = constants.getProperty(key);
 			res = getTypedValue(value);
@@ -65,7 +76,9 @@ public final class MirrorConstants {
 		}
 
 		if (res == null) {
-			System.err.println("Error while accessing application constants. Check file \"mirror.properties\" for invalid keys/values.");
+			err.printf(
+				"Error while accessing application constants; check file \"%s\" for invalid keys/values",
+				path.getFileName());
 			System.exit(0);
 		}
 		return res;
