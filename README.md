@@ -1,22 +1,27 @@
-# README // Mirror encrypt
+# Mirror Encrypt
 
-Encrypt or decode messages using a grid of mirrors and a laser
+Encrypt or decode messages using a grid of mirrors and a laser.
 
-### Overview
+## Overview
 - This program provides an interesting way to encrypt/decrypt messages using mirrors and laser beams!
 - It includes various ways to create your own unique sets of mirrors (mirror fields), load fields that you've already made,
-  generate mirrors automatically, or save some of your favorite combinations
-- The program also animates the process in real time, unless it is run in text-only mode (see commands for more info)
-- To run the program, double-click on the file `launch.bat`
+  generate mirrors automatically, or save some of your favorite combinations.
+- The program also animates the process in real time, unless it is run in text-only mode (see [commands](#commands) for more info).
 - Additionally, you can customize many parts of the program using commands. A full list of commands, what they do,
-  and how to use them can be found below
+  and how to use them can be found [below](#commands).
+  
+## Usage
+To launch the program, run the `launch.bat` file by double-clicking it or by running the `launch` command in `CMD` (Windows only):
+```cmd
+> launch
+```
 
-### Info
-- Author: Matthew Davidson (mdavidson390@outlook.com)
-- Version: 2.2.0
-- Languages: Java, Batch
-- Offline
-- LOC: 1503
+Or, you can launch the program manually with:
+```sh
+$ javac -d bin src/*.java
+$ javac -d bin lib/*.java
+$ java -cp bin src/MirrorEncrypt
+```
 
 ---
 
@@ -43,7 +48,7 @@ Encrypt or decode messages using a grid of mirrors and a laser
 | success_color   | Changes color 2 (the "output" color)                                    | Named² or hex color      |                                                    |
 
 ### Command notes
-¹ The delay, *n*, must be in the range 0 ≤ *n* ≤ 2,147,483,647 \
+¹ The delay, *n*, must be in the range 0 ≤ *n* ≤ 2,147,483,647 (`Integer.MAX_VALUE`) \
 ² Named colors are limited to the following values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow 
 
 ---
