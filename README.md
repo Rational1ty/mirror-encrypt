@@ -1,6 +1,8 @@
 # Mirror Encrypt
 
-Encrypt or decode messages using a grid of mirrors and a laser.
+Encrypt and decrypt messages using a grid of mirrors and a laser.
+
+![mirror-encrypt-example](https://github.com/user-attachments/assets/4222c65a-8b95-4c98-a6ac-50e369d95054)
 
 ## Overview
 - This program provides an interesting way to encrypt/decrypt messages using mirrors and laser beams!
@@ -80,15 +82,3 @@ $ java -cp bin src/MirrorEncrypt
   - The field will be saved as a `.txt` file in `assets/user/`
   - Don't worry about creating the file first; the file will be created for you if it doesn't already exist
   - You can enter the name of a file that already exists to replace it
-
----
-
-## How to install Java
-
-In order to run a Java program, you must first install Java on your computer. If Java is already installed on this device, 
-then you should be ready to go. Otherwise, you'll need to follow these steps in order to download and install Java. If you're
-not sure whether you have Java installed or not, follow the brief steps below.
-
-### Checking if Java is already installed
-1. Open the windows search bar (bottom left on the desktop) and search for "java".
-2. If the first result is `java`, then Java is already installed. Otherwise, you will need to install Java before you can run any Java programs.
