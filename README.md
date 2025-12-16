@@ -1,28 +1,33 @@
 # Mirror Encrypt
 
-Encrypt and decrypt messages using a grid of mirrors and a laser.
+<div align="center">
 
-![mirror-encrypt-example](https://github.com/user-attachments/assets/4222c65a-8b95-4c98-a6ac-50e369d95054)
+![mirror-encrypt-gif](https://github.com/user-attachments/assets/4222c65a-8b95-4c98-a6ac-50e369d95054)
+
+</div>
+
+---
 
 ## Overview
 - This program provides an interesting way to encrypt/decrypt messages using mirrors and laser beams!
-- It includes various ways to create your own unique sets of mirrors (mirror fields), load fields that you've already made,
+- It includes various ways to create your own unique fields of mirrors, load fields that you've already made,
   generate mirrors automatically, or save some of your favorite combinations.
-- The program also animates the process in real time, unless it is run in text-only mode (see [commands](#commands) for more info).
-- Additionally, you can customize many parts of the program using commands. A full list of commands, what they do,
-  and how to use them can be found [below](#commands).
-  
+- The program also animates the process in real time, unless it is run in text-only mode.
+- Additionally, you can customize many parts of the program while it's running using [commands](#commands).
+
+
 ## Usage
-To launch the program, run the `launch.bat` file by double-clicking it or by running the `launch` command in `CMD` (Windows only):
+
+Run the `launch.bat` script by double-clicking it or by running the `launch` command in `CMD` (Windows only):
 ```cmd
-> launch
+launch
 ```
 
 Or, you can launch the program manually with:
 ```sh
-$ javac -d bin src/*.java
-$ javac -d bin lib/*.java
-$ java -cp bin src/MirrorEncrypt
+javac -d bin src/*.java
+javac -d bin lib/*.java
+java -cp bin src/MirrorEncrypt
 ```
 
 ---
@@ -42,20 +47,18 @@ $ java -cp bin src/MirrorEncrypt
 ### List of commands
 |     Command     |                               Description                               |      Accepted values     |                        Notes                       |
 | --------------- | ----------------------------------------------------------------------- | ------------------------ | -------------------------------------------------- |
-| delay           | Changes the amount of time between each frame of animation              | Non-negative integers¹   | Values are measured in milliseconds                |
+| delay           | Changes the amount of time between each frame of animation              | Non-negative integers    | Values are measured in milliseconds                |
 | create_window   | Determines whether or not the encryption/decryption process is animated | 0 or 1                   |                                                    |
 | repeat_sequence | Toggles repeat when entering a mirror field from the keyboard           | 0 or 1                   | Will repeat input sequence until field is full     |
-| beam_color      | Changes the color of the beam                                           | Named² or hex color      | Only certain color names are valid; see list below |
-| trace_color     | Changes color 1 (the "input" color)                                     | Named² or hex color      |                                                    |
-| success_color   | Changes color 2 (the "output" color)                                    | Named² or hex color      |                                                    |
+| beam_color      | Changes the color of the beam                                           | Named¹ or hex color      | Only certain color names are valid; see list below |
+| trace_color     | Changes color 1 (the "input" color)                                     | Named¹ or hex color      |                                                    |
+| success_color   | Changes color 2 (the "output" color)                                    | Named¹ or hex color      |                                                    |
 
 ### Command notes
-¹ The delay, *n*, must be in the range 0 ≤ *n* ≤ 2,147,483,647 (`Integer.MAX_VALUE`) \
-² Named colors are limited to the following values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow 
+¹ Named colors are limited to the following values: black, blue, cyan, gray, green, magenta, orange, pink, red, white, yellow
 
----
 
-## Tips and Tricks
+## Tips
 
 ### Creating/loading mirror field
 1. From the keyboard
@@ -64,8 +67,8 @@ $ java -cp bin src/MirrorEncrypt
     - You can enter numbers (1-9) to represent a group of spaces
     - Ex: `/\/7/\` translates to `/\/       /\`
 2. From a file
-    - You can create your own mirror fields by using notepad or any other simple text editor
-    - If you make your own, make sure that the field is exactly 13 x 13 characters (you can check by pressing `ctrl + a` –
+    - You can create your own mirror fields by using notepad or any other text editor
+    - If you make your own, make sure that the field is exactly 13 × 13 characters (you can check by pressing `ctrl + a` –
       it should highlight a blue rectangle. If there are any areas that aren't highlighted, fill them in with spaces)
     - Save it as a `.txt` file in the `assets/user/` folder
     - When running the program, you can load saved mirror fields by entering the filename when prompted
@@ -76,9 +79,8 @@ $ java -cp bin src/MirrorEncrypt
 
 ### Main menu
 - Sometimes, the animation window will be created in the background whenever you start to encrypt/decrypt a message. If you
-  don't see the window show up, look at the taskbar (bottom of the screen) for a picture of a red laser bouncing off
-  a mirror. This is the window; simply click it to bring it to the front
+  don't see the window show up, look at the taskbar and click the window icon to bring it to the front
 - If you like the mirrors that you have set up, you can save them by choosing *option 4: export mirror field*
   - The field will be saved as a `.txt` file in `assets/user/`
-  - Don't worry about creating the file first; the file will be created for you if it doesn't already exist
+  - The file will be created for you if it doesn't already exist
   - You can enter the name of a file that already exists to replace it
